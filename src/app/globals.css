@@ -7,9 +7,9 @@
   --muted: #475569;         /* slate-600 */
   --line: rgba(15, 23, 42, 0.08);
 
-  /* brand – vyladíme podle finálního loga */
-  --brand: #0f766e;         /* teal-700 */
-  --brand-2: #14b8a6;       /* teal-500 */
+  /* brand – podle dodaného loga (oranžovo/žlutá) */
+  --brand: #f97316;         /* orange-500 */
+  --brand-2: #f59e0b;       /* amber-500 */
 }
 
 @theme inline {
