@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f8fafc;            /* slate-50-ish */
+  --surface: #ffffff;
+  --text: #0f172a;          /* slate-900 */
+  --muted: #475569;         /* slate-600 */
+  --line: rgba(15, 23, 42, 0.08);
+
+  /* brand – vyladíme podle finálního loga */
+  --brand: #0f766e;         /* teal-700 */
+  --brand-2: #14b8a6;       /* teal-500 */
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--brand-2) 25%, white);
+}
+
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container { padding-inline: 1.25rem; }
+}
+
+@media (min-width: 1024px) {
+  .container { max-width: 1120px; }
+}
