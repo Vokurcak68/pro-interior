@@ -77,20 +77,22 @@ export default function Home() {
 
               <div className="lg:col-span-6">
                 <div
-                className="aspect-[4/3] w-full rounded-3xl border overflow-hidden"
-                style={{
-                  borderColor: "var(--line)",
-                  background:
-                    "linear-gradient(135deg, rgba(249,115,22,.18), rgba(245,158,11,.08))",
-                }}
-              >
-                <div className="h-full w-full flex items-center justify-center text-slate-600 text-sm">
-                  Sem přijde velká fotka realizace (hero)
+                  className="aspect-[4/3] w-full rounded-3xl border overflow-hidden"
+                  style={{ borderColor: "var(--line)", background: "var(--surface)" }}
+                >
+                  {/* Fotka bude v /public/realizace/hero-1.jpg */}
+                  <div
+                    className="h-full w-full bg-center bg-cover"
+                    style={{
+                      backgroundImage:
+                        "url(/realizace/hero-1.jpg), linear-gradient(135deg, rgba(249,115,22,.18), rgba(245,158,11,.08))",
+                    }}
+                    aria-label="Ukázka realizace"
+                  />
                 </div>
-              </div>
-              <div className="mt-3 text-xs text-slate-500">
-                Řemeslný vibe: teplejší pozadí + oranžový akcent + fotky detailů.
-              </div>
+                <div className="mt-3 text-xs text-slate-500">
+                  (Až dodáš 4 AI fotky, web je začne zobrazovat automaticky.)
+                </div>
               </div>
             </div>
           </div>

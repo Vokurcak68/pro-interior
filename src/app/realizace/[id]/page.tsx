@@ -23,20 +23,34 @@ export default async function RealizaceDetailPage({
           <div className="mt-6 grid gap-8 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <div
-                className="aspect-[4/3] w-full rounded-3xl border overflow-hidden bg-slate-100 flex items-center justify-center text-slate-500"
-                style={{ borderColor: "var(--line)" }}
+                className="aspect-[4/3] w-full rounded-3xl border overflow-hidden"
+                style={{ borderColor: "var(--line)", background: "var(--surface)" }}
               >
-                Galerie / cover fotka ({id})
+                <div
+                  className="h-full w-full bg-center bg-cover"
+                  style={{
+                    backgroundImage:
+                      "url(/realizace/hero-1.jpg), linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))",
+                  }}
+                  aria-label={`Realizace ${id}`}
+                />
               </div>
 
-              <div className="mt-4 grid grid-cols-3 gap-3">
-                {Array.from({ length: 6 }).map((_, i) => (
+              <div className="mt-4 grid grid-cols-4 gap-3">
+                {Array.from({ length: 4 }).map((_, i) => (
                   <div
                     key={i}
-                    className="aspect-square rounded-2xl border bg-slate-50 flex items-center justify-center text-xs text-slate-500"
-                    style={{ borderColor: "var(--line)" }}
+                    className="aspect-square rounded-2xl border overflow-hidden"
+                    style={{ borderColor: "var(--line)", background: "var(--surface)" }}
                   >
-                    {i + 1}
+                    <div
+                      className="h-full w-full bg-center bg-cover"
+                      style={{
+                        backgroundImage:
+                          `url(/realizace/hero-${i + 1}.jpg), linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))`,
+                      }}
+                      aria-label={`Foto ${i + 1}`}
+                    />
                   </div>
                 ))}
               </div>
