@@ -15,7 +15,7 @@ export function SiteHeader() {
       className="sticky top-0 z-40 border-b"
       style={{
         borderColor: "var(--line)",
-        background: "rgba(248,250,252,.8)",
+        background: "rgba(255, 247, 237, .85)",
         backdropFilter: "blur(10px)",
       }}
     >
@@ -32,7 +32,7 @@ export function SiteHeader() {
             />
             <div className="leading-tight">
               <div className="font-semibold tracking-tight text-slate-900">pro-interior</div>
-              <div className="text-xs text-slate-500">truhlářství</div>
+              <div className="text-xs" style={{ color: "var(--wood)" }}>truhlářství</div>
             </div>
           </Link>
 

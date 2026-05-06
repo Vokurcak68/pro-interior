@@ -76,14 +76,21 @@ export default function Home() {
               </div>
 
               <div className="lg:col-span-6">
-                <div className="aspect-[4/3] w-full rounded-3xl border overflow-hidden" style={{ borderColor: "var(--line)", background: "linear-gradient(135deg, rgba(20,184,166,.12), rgba(15,118,110,.06))" }}>
-                  <div className="h-full w-full flex items-center justify-center text-slate-500 text-sm">
-                    Sem přijde velká fotka realizace (hero)
-                  </div>
+                <div
+                className="aspect-[4/3] w-full rounded-3xl border overflow-hidden"
+                style={{
+                  borderColor: "var(--line)",
+                  background:
+                    "linear-gradient(135deg, rgba(249,115,22,.18), rgba(245,158,11,.08))",
+                }}
+              >
+                <div className="h-full w-full flex items-center justify-center text-slate-600 text-sm">
+                  Sem přijde velká fotka realizace (hero)
                 </div>
-                <div className="mt-3 text-xs text-slate-500">
-                  Tip: do hero dáme jednu top realizaci + jemný grain.
-                </div>
+              </div>
+              <div className="mt-3 text-xs text-slate-500">
+                Řemeslný vibe: teplejší pozadí + oranžový akcent + fotky detailů.
+              </div>
               </div>
             </div>
           </div>

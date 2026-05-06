@@ -1,15 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f8fafc;            /* slate-50-ish */
+  /* světlej „řemeslo“ základ – teplý neutrály místo studený šedi */
+  --bg: #fff7ed;            /* orange-50 */
   --surface: #ffffff;
+  --surface-2: #fffbf5;     /* lehce krémová */
   --text: #0f172a;          /* slate-900 */
   --muted: #475569;         /* slate-600 */
-  --line: rgba(15, 23, 42, 0.08);
+  --line: rgba(15, 23, 42, 0.10);
 
   /* brand – podle dodaného loga (oranžovo/žlutá) */
   --brand: #f97316;         /* orange-500 */
   --brand-2: #f59e0b;       /* amber-500 */
+
+  /* „wood“ akcent (jen jemně) */
+  --wood: #92400e;          /* amber-800 */
 }
 
 @theme inline {
