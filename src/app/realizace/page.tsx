@@ -29,16 +29,22 @@ export default function RealizacePage() {
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {items.map((it) => (
+            {items.map((it, idx) => (
               <Link
                 key={it.id}
                 href={`/realizace/${it.id}`}
                 className="rounded-2xl border overflow-hidden block"
                 style={{ borderColor: "var(--line)", background: "var(--surface)" }}
               >
-                <div className="aspect-[4/3] w-full bg-slate-100 flex items-center justify-center text-slate-500 text-sm">
-                  Fotka
-                </div>
+                <div
+                  className="aspect-[4/3] w-full"
+                  style={{
+                    backgroundImage: `url(/realizace/r${String((idx % 12) + 1).padStart(2, "0")}.svg)`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                  aria-label={it.title}
+                />
                 <div className="p-4">
                   <div className="text-sm font-medium text-slate-900">{it.title}</div>
                   <div className="mt-1 text-xs text-slate-600">{it.category}</div>

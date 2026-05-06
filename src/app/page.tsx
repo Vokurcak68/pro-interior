@@ -121,9 +121,15 @@ export default function Home() {
                 className="rounded-2xl border overflow-hidden"
                 style={{ borderColor: "var(--line)", background: "var(--surface)" }}
               >
-                <div className="aspect-[4/3] w-full bg-slate-100 flex items-center justify-center text-slate-500 text-sm">
-                  Fotka {i + 1}
-                </div>
+                <div
+                  className="aspect-[4/3] w-full bg-slate-100"
+                  style={{
+                    backgroundImage: `url(/realizace/r${String(i + 1).padStart(2, "0")}.svg)`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                  aria-label={`Realizace ${i + 1}`}
+                />
                 <div className="p-4">
                   <div className="text-sm font-medium text-slate-900">Realizace #{i + 1}</div>
                   <div className="mt-1 text-xs text-slate-600">Kuchyně / Vestavba / Nábytek</div>
