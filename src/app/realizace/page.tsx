@@ -29,7 +29,7 @@ export default function RealizacePage() {
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {items.map((it, idx) => (
+            {items.map((it) => (
               <Link
                 key={it.id}
                 href={`/realizace/${it.id}`}
@@ -37,14 +37,14 @@ export default function RealizacePage() {
                 style={{ borderColor: "var(--line)", background: "var(--surface)" }}
               >
                 <div
-                  className="aspect-[4/3] w-full"
+                  className="aspect-[4/3] w-full flex items-center justify-center text-slate-500 text-sm"
                   style={{
-                    backgroundImage: `url(/realizace/r${String((idx % 12) + 1).padStart(2, "0")}.svg)`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
+                    background:
+                      "linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))",
                   }}
-                  aria-label={it.title}
-                />
+                >
+                  Fotka
+                </div>
                 <div className="p-4">
                   <div className="text-sm font-medium text-slate-900">{it.title}</div>
                   <div className="mt-1 text-xs text-slate-600">{it.category}</div>
