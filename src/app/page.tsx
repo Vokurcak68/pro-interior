@@ -124,14 +124,13 @@ export default function Home() {
                 style={{ borderColor: "var(--line)", background: "var(--surface)" }}
               >
                 <div
-                  className="aspect-[4/3] w-full flex items-center justify-center text-slate-500 text-sm"
+                  className="aspect-[4/3] w-full bg-center bg-cover"
                   style={{
-                    background:
-                      "linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))",
+                    backgroundImage:
+                      `url(/realizace/hero-${(i % 4) + 1}.jpg), linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))`,
                   }}
-                >
-                  Fotka realizace (doplníme)
-                </div>
+                  aria-label={`Realizace ${i + 1}`}
+                />
                 <div className="p-4">
                   <div className="text-sm font-medium text-slate-900">Realizace #{i + 1}</div>
                   <div className="mt-1 text-xs text-slate-600">Kuchyně / Vestavba / Nábytek</div>
