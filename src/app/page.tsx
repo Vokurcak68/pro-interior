@@ -21,84 +21,71 @@ const services = [
 export default function Home() {
   return (
     <div className="min-h-full flex flex-col">
-      <SiteHeader />
-
       <main className="flex-1">
-        {/* HERO */}
-        <section className="pt-10 sm:pt-16">
-          <div className="container">
-            <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
-              <div className="lg:col-span-6">
-                <div className="text-xs font-semibold tracking-[0.22em] uppercase" style={{ color: "var(--brand)" }}>
-                  TRUHLÁŘSTVÍ PRO-INTERIOR
-                </div>
-                <h1 className="mt-3 text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900">
-                  Interiéry na míru.
-                  <br />
-                  Čistý detail. Poctivá práce.
-                </h1>
-                <p className="mt-5 text-lg leading-8 text-slate-600 max-w-xl">
-                  Kuchyně, vestavby a nábytek přesně podle prostoru. Přivezu vzorky,
-                  domluvíme detaily a dodáme výsledek, co vydrží.
-                </p>
+        {/* HERO (cover jako Tříska) */}
+        <section className="relative">
+          <div
+            className="min-h-[520px] sm:min-h-[620px]"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.28) 55%, rgba(0,0,0,.10) 100%), url(/realizace/hero-1.jpg)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <SiteHeader variant="overlay" />
 
-                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <Link
-                    href="/kontakt"
-                    className="inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-medium text-white"
-                    style={{ background: "linear-gradient(135deg, var(--brand), var(--brand-2))" }}
-                  >
-                    Nezávazná poptávka
-                  </Link>
-                  <Link
-                    href="/realizace"
-                    className="inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-medium border"
-                    style={{ borderColor: "var(--line)", background: "var(--surface)" }}
-                  >
-                    Naše realizace
-                  </Link>
-                </div>
-
-                <div className="mt-8 grid grid-cols-3 gap-4 max-w-md">
-                  <div className="rounded-2xl border p-4" style={{ borderColor: "var(--line)", background: "var(--surface)" }}>
-                    <div className="text-xl font-semibold text-slate-900">10+ let</div>
-                    <div className="text-sm text-slate-600">zkušeností</div>
-                  </div>
-                  <div className="rounded-2xl border p-4" style={{ borderColor: "var(--line)", background: "var(--surface)" }}>
-                    <div className="text-xl font-semibold text-slate-900">Na míru</div>
-                    <div className="text-sm text-slate-600">každý kus</div>
-                  </div>
-                  <div className="rounded-2xl border p-4" style={{ borderColor: "var(--line)", background: "var(--surface)" }}>
-                    <div className="text-xl font-semibold text-slate-900">Montáž</div>
-                    <div className="text-sm text-slate-600">bez stresu</div>
-                  </div>
+            <div className="container h-full">
+              <div className="pt-28 sm:pt-32">
+                <div className="max-w-2xl">
+                  <h1 className="text-white text-4xl sm:text-6xl font-semibold tracking-tight">
+                    Pro-Interior
+                  </h1>
+                  <p className="mt-5 text-white/90 text-lg leading-8">
+                    Vyrábíme nábytek na míru s důrazem na kvalitu, preciznost a včasné dodání.
+                    Specializujeme se na kuchyně, vestavby a nábytek na míru.
+                  </p>
                 </div>
               </div>
 
-              <div className="lg:col-span-6">
-                <div
-                  className="aspect-[4/3] w-full rounded-3xl border overflow-hidden"
-                  style={{ borderColor: "var(--line)", background: "var(--surface)" }}
-                >
-                  {/* Fotka bude v /public/realizace/hero-1.jpg */}
-                  <div
-                    className="h-full w-full bg-center bg-cover"
-                    style={{
-                      backgroundImage:
-                        "url(/realizace/hero-1.jpg), linear-gradient(135deg, rgba(249,115,22,.18), rgba(245,158,11,.08))",
-                    }}
-                    aria-label="Ukázka realizace"
-                  />
-                </div>
-                <div className="mt-3 text-xs text-slate-500">
-                  (Až dodáš 4 AI fotky, web je začne zobrazovat automaticky.)
-                </div>
+              {/* 3 boxy jako na Tříska */}
+              <div className="mt-10 pb-10 grid gap-4 lg:grid-cols-3">
+                {[{
+                  title: "Nábytek na míru",
+                  desc: "Klademe důraz na kvalitu, precizní zpracování a spolehlivé dodání.",
+                  href: "/sluzby",
+                  cta: "Všechny naše služby",
+                },{
+                  title: "Realizace mluví za nás",
+                  desc: "Každá zakázka je pro nás jedinečnou výzvou, které se s nadšením věnujeme.",
+                  href: "/realizace",
+                  cta: "Realizace",
+                },{
+                  title: "Rádi poradíme",
+                  desc: "Kontaktujte nás a společně vytvoříme projekt přesně podle vašich představ.",
+                  href: "/kontakt",
+                  cta: "Kontaktujte nás",
+                }].map((b) => (
+                  <div key={b.title} className="rounded-3xl overflow-hidden" style={{ background: "rgba(255,255,255,.92)", border: "1px solid rgba(255,255,255,.25)" }}>
+                    <div className="p-7">
+                      <h2 className="text-xl font-semibold text-slate-900">{b.title}</h2>
+                      <p className="mt-2 text-sm leading-7 text-slate-600">{b.desc}</p>
+                      <div className="mt-4">
+                        <Link href={b.href} className="inline-flex items-center gap-2 text-sm font-medium" style={{ color: "var(--wood)" }}>
+                          {b.cta}
+                          <span aria-hidden>→</span>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* SLUŽBY */}
+        <SiteHeader />
+
         <Section title="Co pro vás vyrobíme" kicker="Služby">
           <div className="grid gap-4 md:grid-cols-3">
             {services.map((s) => (
