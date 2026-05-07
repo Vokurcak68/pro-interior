@@ -3,47 +3,47 @@
     "id": "seed-hero-1",
     "createdAt": "2026-05-07T00:00:00.000Z",
     "title": "Kuchyně na míru – světlý dub",
-    "description": "Realizace kuchyně na míru v teplých neutrálech, kombinace dýhy a matu. Čisté linie, praktické úložné prostory.",
+    "description": "Světlá kuchyně na míru s dřevodekorem a čistou pracovní plochou. Minimalistické linie, hodně úložného prostoru a teplý „domácí“ výraz.",
     "imageUrl": "/realizace/hero-1.jpg",
     "published": true
   },
   {
     "id": "seed-hero-2",
     "createdAt": "2026-05-06T00:00:00.000Z",
-    "title": "Vestavby do chodby + botník",
-    "description": "Vestavěná skříňová stěna do předsíně, botník a lavice. Odolný dekor, jednoduchá údržba.",
+    "title": "Vestavba do předsíně",
+    "description": "Vestavěná skříňová stěna do chodby – čisté bílé plochy, dřevěný akcent a praktické odkládání. Řešení na míru pro maximum prostoru bez chaosu.",
     "imageUrl": "/realizace/hero-2.jpg",
     "published": true
   },
   {
     "id": "seed-hero-3",
     "createdAt": "2026-05-05T00:00:00.000Z",
-    "title": "Obýváková stěna + TV panel",
-    "description": "Nábytek na míru do obýváku – TV panel, uzavřené skříňky a otevřené police. Teplé dřevo, decentní světlo.",
+    "title": "Obýváková stěna s TV panelem",
+    "description": "Nábytek na míru do obýváku: TV panel, uzavřené skříňky a otevřené police. Kombinace dřeva a jednoduchých linií pro čistý, moderní vzhled.",
     "imageUrl": "/realizace/hero-3.jpg",
     "published": true
   },
   {
     "id": "seed-hero-4",
     "createdAt": "2026-05-04T00:00:00.000Z",
-    "title": "Koupelna – skříňky a deska",
-    "description": "Koupelnový nábytek na míru s deskou pod umyvadlo a úložnými skříňkami. Minimalistický vzhled, funkční řešení.",
+    "title": "Koupelna – skříňka pod umyvadlo",
+    "description": "Koupelnový nábytek na míru s deskou pod umyvadlo a úložnými zásuvkami. Minimalistické provedení, odolné materiály a snadná údržba.",
     "imageUrl": "/realizace/hero-4.jpg",
     "published": true
   },
   {
     "id": "seed-hero-5",
     "createdAt": "2026-05-03T00:00:00.000Z",
-    "title": "Jednobarevná dvířka – moderní kuchyně",
-    "description": "Moderní kuchyně s jednobarevnými dvířky a dřevěným akcentem. Důraz na čistotu detailu a ergonomii.",
+    "title": "Moderní kuchyně – jednobarevná dvířka",
+    "description": "Moderní kuchyně s hladkými jednobarevnými dvířky a dřevěným akcentem. Důraz na čistý detail, praktické rozvržení a pohodlné vaření.",
     "imageUrl": "/realizace/hero-5.jpg",
     "published": true
   },
   {
     "id": "seed-hero-6",
     "createdAt": "2026-05-02T00:00:00.000Z",
-    "title": "Světlý nábytek – vestavba do ložnice",
-    "description": "Světlá vestavba do ložnice: šatní skříň + úložné řešení. Vizuálně lehké, hodně prostoru.",
+    "title": "Vestavba do ložnice – šatní skříň",
+    "description": "Světlá vestavba do ložnice: šatní skříň a úložné řešení na míru. Vizuálně lehké provedení, jednoduché členění a maximum využitelného prostoru.",
     "imageUrl": "/realizace/hero-6.jpg",
     "published": true
   }
