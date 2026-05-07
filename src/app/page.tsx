@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Section } from "@/components/Section";
+import { listRealizace } from "@/lib/realizaceStore";
 
 const services = [
   {
@@ -19,6 +20,8 @@ const services = [
 ];
 
 export default function Home() {
+  const realizace = listRealizace({ includeUnpublished: false }).slice(0, 6);
+
   return (
     <div className="min-h-full flex flex-col">
       <main className="flex-1">
@@ -103,25 +106,27 @@ export default function Home() {
         {/* REALIZACE PREVIEW */}
         <Section title="Naše realizace" kicker="Ukázky práce">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div
-                key={i}
-                className="rounded-2xl border overflow-hidden"
+            {realizace.map((it) => (
+              <Link
+                key={it.id}
+                href={`/realizace/${it.id}`}
+                className="rounded-2xl border overflow-hidden block"
                 style={{ borderColor: "var(--line)", background: "var(--surface)" }}
               >
                 <div
                   className="aspect-[4/3] w-full bg-center bg-cover"
                   style={{
-                    backgroundImage:
-                      `url(/realizace/hero-${(i % 6) + 1}.jpg), linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))`,
+                    backgroundImage: it.imageUrl
+                      ? `url(${it.imageUrl}), linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))`
+                      : "linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))",
                   }}
-                  aria-label={`Realizace ${i + 1}`}
+                  aria-label={it.title}
                 />
                 <div className="p-4">
-                  <div className="text-sm font-medium text-slate-900">Realizace #{i + 1}</div>
-                  <div className="mt-1 text-xs text-slate-600">Kuchyně / Vestavba / Nábytek</div>
+                  <div className="text-sm font-medium text-slate-900">{it.title}</div>
+                  <div className="mt-1 text-xs text-slate-600 line-clamp-2">{it.description}</div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
