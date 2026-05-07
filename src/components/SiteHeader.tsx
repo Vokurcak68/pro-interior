@@ -40,7 +40,7 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
           <Link href="/" className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
             <Image
               src="/logo.jpg"
-              alt="Pro-Interior"
+              alt="PRO-interior"
               width={34}
               height={34}
               className={isOverlay ? "rounded-lg" : "rounded-lg border"}
@@ -54,7 +54,7 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
                     : "font-semibold tracking-tight text-slate-900 truncate text-sm sm:text-base"
                 }
               >
-                Pro-Interior
+                PRO-interior
               </div>
               <div
                 className={isOverlay ? "hidden sm:block text-xs text-white/80" : "hidden sm:block text-xs"}

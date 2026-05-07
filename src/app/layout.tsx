@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pro-Interior | Truhlářství na míru",
+  title: "PRO-interior | Truhlářství na míru",
   description:
-    "Pro-Interior – truhlářství a interiéry na míru. Kuchyně, vestavby, nábytek, realizace a nezávazná poptávka.",
+    "PRO-interior – truhlářství a interiéry na míru. Kuchyně, vestavby, nábytek, realizace a nezávazná poptávka.",
 };
 
 export default function RootLayout({

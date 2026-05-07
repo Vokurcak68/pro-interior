@@ -39,7 +39,7 @@ export default function Home() {
               <div className="pt-28 sm:pt-32">
                 <div className="max-w-2xl">
                   <h1 className="text-white text-4xl sm:text-6xl font-semibold tracking-tight">
-                    Pro-Interior
+                    PRO-interior
                   </h1>
                   <p className="mt-5 text-white/90 text-lg leading-8">
                     Vyrábíme nábytek na míru s důrazem na kvalitu, preciznost a včasné dodání.
