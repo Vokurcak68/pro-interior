@@ -10,7 +10,8 @@ export type RealizaceItem = {
   published: boolean;
 };
 
-const DATA_PATH = path.resolve(process.cwd(), "src/data/realizace.json");
+export const REALIZACE_JSON_PATH = "src/data/realizace.json";
+const DATA_PATH = path.resolve(process.cwd(), REALIZACE_JSON_PATH);
 
 function readAll(): RealizaceItem[] {
   const raw = fs.readFileSync(DATA_PATH, "utf8");
@@ -18,22 +19,17 @@ function readAll(): RealizaceItem[] {
   return Array.isArray(data) ? data : [];
 }
 
-function writeAll(items: RealizaceItem[]) {
-  fs.writeFileSync(DATA_PATH, JSON.stringify(items, null, 2) + "\n", "utf8");
-}
-
 export function listRealizace({ includeUnpublished = false } = {}) {
   const items = readAll().sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   return includeUnpublished ? items : items.filter((x) => x.published);
 }
 
-export function createRealizace(input: {
+export function createRealizaceDraft(input: {
   title: string;
   description: string;
   imageUrl: string;
   published: boolean;
 }) {
-  const items = readAll();
   const id = `r_${Math.random().toString(16).slice(2)}${Date.now().toString(16)}`;
   const item: RealizaceItem = {
     id,
@@ -43,7 +39,14 @@ export function createRealizace(input: {
     imageUrl: input.imageUrl,
     published: input.published,
   };
-  items.push(item);
-  writeAll(items);
+  return item;
+}
+
+export function upsertRealizaceLocal(item: RealizaceItem) {
+  const items = readAll();
+  const idx = items.findIndex((x) => x.id === item.id);
+  if (idx >= 0) items[idx] = item;
+  else items.push(item);
+  fs.writeFileSync(DATA_PATH, JSON.stringify(items, null, 2) + "\n", "utf8");
   return item;
 }

@@ -84,7 +84,6 @@ export default function Home() {
           </div>
         </section>
 
-        <SiteHeader />
 
         <Section title="Co pro vás vyrobíme" kicker="Služby">
           <div className="grid gap-4 md:grid-cols-3">
