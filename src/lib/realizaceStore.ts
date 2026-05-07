@@ -50,3 +50,10 @@ export function upsertRealizaceLocal(item: RealizaceItem) {
   fs.writeFileSync(DATA_PATH, JSON.stringify(items, null, 2) + "\n", "utf8");
   return item;
 }
+
+export function deleteRealizaceLocal(id: string) {
+  const items = readAll();
+  const next = items.filter((x) => x.id !== id);
+  fs.writeFileSync(DATA_PATH, JSON.stringify(next, null, 2) + "\n", "utf8");
+  return { deleted: items.find((x) => x.id === id) || null, items: next };
+}

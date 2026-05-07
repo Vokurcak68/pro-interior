@@ -49,3 +49,21 @@ export async function githubWriteFile(p: GithubWriteFileParams & { sha?: string 
 
   return gh(url, { method: "PUT", body: JSON.stringify(body) }, p.token);
 }
+
+export async function githubDeleteFile(opts: {
+  token: string;
+  owner: string;
+  repo: string;
+  branch: string;
+  path: string;
+  sha: string;
+  message: string;
+}) {
+  const url = `https://api.github.com/repos/${opts.owner}/${opts.repo}/contents/${encodeURIComponent(opts.path).replaceAll("%2F", "/")}`;
+  const body = {
+    message: opts.message,
+    sha: opts.sha,
+    branch: opts.branch,
+  };
+  return gh(url, { method: "DELETE", body: JSON.stringify(body) }, opts.token);
+}

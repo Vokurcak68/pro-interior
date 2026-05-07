@@ -38,8 +38,8 @@ export default async function AdminRealizaceList() {
           items.map((it) => (
             <div key={it.id} className="rounded-2xl border p-5" style={{ borderColor: "var(--line)", background: "var(--surface)" }}>
               <div className="flex items-start justify-between gap-4">
-                <div>
-                  <div className="text-sm font-semibold text-slate-900">{it.title}</div>
+                <div className="min-w-0">
+                  <div className="text-sm font-semibold text-slate-900 truncate">{it.title}</div>
                   <div className="mt-1 text-xs text-slate-600">{it.published ? "Publikováno" : "Neveřejné"}</div>
                 </div>
                 {it.imageUrl ? (
@@ -48,7 +48,21 @@ export default async function AdminRealizaceList() {
                 ) : null}
               </div>
               <div className="mt-3 text-sm text-slate-600 line-clamp-3">{it.description}</div>
-              <div className="mt-3 text-xs text-slate-500">ID: {it.id}</div>
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+                <div className="text-xs text-slate-500">ID: {it.id}</div>
+                <form action="/admin/api/realizace/delete" method="post" onSubmit={(e) => {
+                  if (!confirm(`Smazat realizaci „${it.title}“?`)) e.preventDefault();
+                }}>
+                  <input type="hidden" name="id" value={it.id} />
+                  <button
+                    type="submit"
+                    className="rounded-full px-4 py-2 text-xs font-semibold border"
+                    style={{ borderColor: "rgba(239,68,68,.35)", background: "rgba(239,68,68,.08)", color: "#991b1b" }}
+                  >
+                    Smazat
+                  </button>
+                </form>
+              </div>
             </div>
           ))
         )}
