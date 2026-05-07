@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import realizaceBundled from "@/data/realizace.json";
 
 export type RealizaceItem = {
   id: string;
@@ -21,10 +22,8 @@ function readAll(): RealizaceItem[] {
     const data = JSON.parse(raw) as RealizaceItem[];
     return Array.isArray(data) ? data : [];
   } catch {
-    // Fallback: načti JSON přes ESM import (funguje spolehlivě i po bundlingu)
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const mod = require("@/data/realizace.json");
-    const data = (mod?.default ?? mod) as RealizaceItem[];
+    // Fallback: použij bundlený JSON (spolehlivé na Vercelu)
+    const data = realizaceBundled as unknown as RealizaceItem[];
     return Array.isArray(data) ? data : [];
   }
 }
