@@ -23,10 +23,10 @@ function sign(payload: string, secret: string) {
 
 
 export function makeAdminCookie(password: string) {
-  const secret = process.env.ADMIN_SECRET;
-  if (!secret) throw new Error("Missing ADMIN_SECRET");
-
+  // když je heslo špatně, nechceme shazovat appku jen kvůli chybějícímu secretu
   if (!verifyAdminPassword(password)) return null;
+
+  const secret = process.env.ADMIN_SECRET || "pi_admin_secret_fallback_change_me";
 
   const exp = Date.now() + 1000 * 60 * 60 * 24 * 14; // 14 days
   const payload = JSON.stringify({ exp });

@@ -4,6 +4,15 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { listRealizace } from "@/lib/realizaceStore";
 
 const items = listRealizace();
+const fallbackItems = Array.from({ length: 12 }).map((_, i) => ({
+  id: `demo-${i + 1}`,
+  title: `Realizace #${i + 1}`,
+  description: "Kuchyně / Vestavby / Nábytek",
+  imageUrl: "",
+  published: true,
+  createdAt: new Date(0).toISOString(),
+}));
+const viewItems = items.length ? items : fallbackItems;
 
 export default function RealizacePage() {
   return (
@@ -25,7 +34,7 @@ export default function RealizacePage() {
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {items.map((it, idx) => (
+            {viewItems.map((it, idx) => (
               <Link
                 key={it.id}
                 href={`/realizace/${it.id}`}
