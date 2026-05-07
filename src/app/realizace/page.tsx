@@ -1,13 +1,9 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { listRealizace } from "@/lib/realizaceStore";
 
-// Placeholder. Až napojíme Supabase, bude se to tahat z DB.
-const items = Array.from({ length: 12 }).map((_, i) => ({
-  id: `demo-${i + 1}`,
-  title: `Realizace #${i + 1}`,
-  category: i % 3 === 0 ? "Kuchyně" : i % 3 === 1 ? "Vestavby" : "Nábytek",
-}));
+const items = listRealizace();
 
 export default function RealizacePage() {
   return (
@@ -39,14 +35,15 @@ export default function RealizacePage() {
                 <div
                   className="aspect-[4/3] w-full bg-center bg-cover"
                   style={{
-                    backgroundImage:
-                      `url(/realizace/hero-${(idx % 6) + 1}.jpg), linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))`,
+                    backgroundImage: it.imageUrl
+                      ? `url(${it.imageUrl})`
+                      : `url(/realizace/hero-${(idx % 6) + 1}.jpg), linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))`,
                   }}
                   aria-label={it.title}
                 />
                 <div className="p-4">
                   <div className="text-sm font-medium text-slate-900">{it.title}</div>
-                  <div className="mt-1 text-xs text-slate-600">{it.category}</div>
+                  <div className="mt-1 text-xs text-slate-600">{it.description}</div>
                 </div>
               </Link>
             ))}

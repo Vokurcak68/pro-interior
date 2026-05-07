@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { verifyAdminPassword } from "./adminPassword";
 
 const COOKIE_NAME = "pi_admin";
 
@@ -20,12 +21,12 @@ function sign(payload: string, secret: string) {
   return base64url(mac);
 }
 
-export function makeAdminCookie(password: string) {
-  const expected = process.env.ADMIN_PASSWORD;
-  const secret = process.env.ADMIN_SECRET;
-  if (!expected || !secret) throw new Error("Missing ADMIN_PASSWORD or ADMIN_SECRET");
 
-  if (password !== expected) return null;
+export function makeAdminCookie(password: string) {
+  const secret = process.env.ADMIN_SECRET;
+  if (!secret) throw new Error("Missing ADMIN_SECRET");
+
+  if (!verifyAdminPassword(password)) return null;
 
   const exp = Date.now() + 1000 * 60 * 60 * 24 * 14; // 14 days
   const payload = JSON.stringify({ exp });
