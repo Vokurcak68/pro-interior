@@ -64,13 +64,7 @@ export default async function AdminRealizaceList() {
                   >
                     Upravit
                   </Link>
-                  <form
-                    action="/admin/api/realizace/delete"
-                    method="post"
-                    onSubmit={(e) => {
-                      if (!confirm(`Smazat realizaci „${it.title}“?`)) e.preventDefault();
-                    }}
-                  >
+                  <form action="/admin/api/realizace/delete" method="post">
                     <input type="hidden" name="id" value={it.id} />
                     <button
                       type="submit"
