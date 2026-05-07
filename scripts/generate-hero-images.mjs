@@ -4,9 +4,20 @@ import path from "node:path";
 const outDir = path.resolve("public/realizace");
 fs.mkdirSync(outDir, { recursive: true });
 
-const apiKey = process.env.OPENAI_API_KEY;
+const apiKey =
+  process.env.OPENAI_API_KEY ||
+  (() => {
+    try {
+      const p = path.resolve(process.cwd(), "../.secrets/openai.key");
+      const v = fs.readFileSync(p, "utf8").trim();
+      return v || null;
+    } catch {
+      return null;
+    }
+  })();
+
 if (!apiKey) {
-  console.error("Missing OPENAI_API_KEY env var");
+  console.error("Missing OPENAI_API_KEY env var (or ../.secrets/openai.key)");
   process.exit(1);
 }
 
@@ -30,6 +41,16 @@ const prompts = [
     file: "hero-4.jpg",
     prompt:
       "Photorealistic custom bathroom vanity cabinet, warm wood + light stone countertop, brushed black fixtures, soft diffused light, premium craftsmanship, ultra realistic, no people, no text, no logo, no watermark",
+  },
+  {
+    file: "hero-5.jpg",
+    prompt:
+      "Photorealistic modern custom-made kitchen interior, LIGHTER Scandinavian style, light ash / light oak wood texture, bright white quartz countertop, soft natural daylight, airy minimal design, very clean lines, ultra realistic, high detail, 35mm lens, f/2.8, no people, no text, no logo, no watermark",
+  },
+  {
+    file: "hero-6.jpg",
+    prompt:
+      "Photorealistic modern custom-made kitchen interior with SOLID COLOR cabinet fronts (single-color), matte off-white / warm beige lacquer doors, no visible wood grain, integrated handle or slim black handle, light neutral backsplash, soft daylight, premium craftsmanship, ultra realistic, high detail, no people, no text, no logo, no watermark",
   },
 ];
 

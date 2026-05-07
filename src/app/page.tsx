@@ -114,7 +114,7 @@ export default function Home() {
                   className="aspect-[4/3] w-full bg-center bg-cover"
                   style={{
                     backgroundImage:
-                      `url(/realizace/hero-${(i % 4) + 1}.jpg), linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))`,
+                      `url(/realizace/hero-${(i % 6) + 1}.jpg), linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))`,
                   }}
                   aria-label={`Realizace ${i + 1}`}
                 />
