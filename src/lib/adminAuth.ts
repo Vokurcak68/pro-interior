@@ -22,11 +22,16 @@ function sign(payload: string, secret: string) {
 }
 
 
+const FALLBACK_SECRET = "pi_admin_secret_fallback_change_me";
+function getAdminSecret() {
+  return process.env.ADMIN_SECRET || FALLBACK_SECRET;
+}
+
 export function makeAdminCookie(password: string) {
   // když je heslo špatně, nechceme shazovat appku jen kvůli chybějícímu secretu
   if (!verifyAdminPassword(password)) return null;
 
-  const secret = process.env.ADMIN_SECRET || "pi_admin_secret_fallback_change_me";
+  const secret = getAdminSecret();
 
   const exp = Date.now() + 1000 * 60 * 60 * 24 * 14; // 14 days
   const payload = JSON.stringify({ exp });
@@ -40,8 +45,7 @@ export function clearAdminCookie() {
 }
 
 export function isAdminFromCookie(cookieValue: string | undefined) {
-  const secret = process.env.ADMIN_SECRET;
-  if (!secret) return false;
+  const secret = getAdminSecret();
   if (!cookieValue) return false;
 
   const [p64, sig] = cookieValue.split(".");
