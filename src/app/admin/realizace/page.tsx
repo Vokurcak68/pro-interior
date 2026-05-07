@@ -50,18 +50,31 @@ export default async function AdminRealizaceList() {
               <div className="mt-3 text-sm text-slate-600 line-clamp-3">{it.description}</div>
               <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
                 <div className="text-xs text-slate-500">ID: {it.id}</div>
-                <form action="/admin/api/realizace/delete" method="post" onSubmit={(e) => {
-                  if (!confirm(`Smazat realizaci „${it.title}“?`)) e.preventDefault();
-                }}>
-                  <input type="hidden" name="id" value={it.id} />
-                  <button
-                    type="submit"
+                <div className="flex items-center gap-2">
+                  <Link
+                    href={`/admin/realizace/${it.id}`}
                     className="rounded-full px-4 py-2 text-xs font-semibold border"
-                    style={{ borderColor: "rgba(239,68,68,.35)", background: "rgba(239,68,68,.08)", color: "#991b1b" }}
+                    style={{ borderColor: "var(--line)", background: "rgba(255,255,255,.6)" }}
                   >
-                    Smazat
-                  </button>
-                </form>
+                    Upravit
+                  </Link>
+                  <form
+                    action="/admin/api/realizace/delete"
+                    method="post"
+                    onSubmit={(e) => {
+                      if (!confirm(`Smazat realizaci „${it.title}“?`)) e.preventDefault();
+                    }}
+                  >
+                    <input type="hidden" name="id" value={it.id} />
+                    <button
+                      type="submit"
+                      className="rounded-full px-4 py-2 text-xs font-semibold border"
+                      style={{ borderColor: "rgba(239,68,68,.35)", background: "rgba(239,68,68,.08)", color: "#991b1b" }}
+                    >
+                      Smazat
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
           ))

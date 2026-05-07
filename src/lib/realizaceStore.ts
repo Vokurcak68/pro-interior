@@ -57,3 +57,8 @@ export function deleteRealizaceLocal(id: string) {
   fs.writeFileSync(DATA_PATH, JSON.stringify(next, null, 2) + "\n", "utf8");
   return { deleted: items.find((x) => x.id === id) || null, items: next };
 }
+
+export function getRealizaceById(id: string) {
+  const items = readAll();
+  return items.find((x) => x.id === id) || null;
+}
