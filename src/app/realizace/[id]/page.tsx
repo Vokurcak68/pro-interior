@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
+
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { getRealizaceById } from "@/lib/realizaceStore";
 
 export default async function RealizaceDetailPage({
   params,
@@ -8,6 +11,13 @@ export default async function RealizaceDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const item = getRealizaceById(id);
+
+  if (!item || !item.published) notFound();
+
+  const mainBg = item.imageUrl
+    ? `url(${item.imageUrl}), linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))`
+    : "linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))";
 
   return (
     <div className="min-h-full flex flex-col">
@@ -28,14 +38,12 @@ export default async function RealizaceDetailPage({
               >
                 <div
                   className="h-full w-full bg-center bg-cover"
-                  style={{
-                    backgroundImage:
-                      "url(/realizace/hero-1.jpg), linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))",
-                  }}
-                  aria-label={`Realizace ${id}`}
+                  style={{ backgroundImage: mainBg }}
+                  aria-label={item.title}
                 />
               </div>
 
+              {/* Zatím máme jen 1 fotku na realizaci (seed). Až přidáš víc fotek, přidáme sem galerii. */}
               <div className="mt-4 grid grid-cols-4 gap-3">
                 {Array.from({ length: 4 }).map((_, i) => (
                   <div
@@ -45,11 +53,8 @@ export default async function RealizaceDetailPage({
                   >
                     <div
                       className="h-full w-full bg-center bg-cover"
-                      style={{
-                        backgroundImage:
-                          `url(/realizace/hero-${i + 1}.jpg), linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))`,
-                      }}
-                      aria-label={`Foto ${i + 1}`}
+                      style={{ backgroundImage: mainBg }}
+                      aria-label={item.title}
                     />
                   </div>
                 ))}
@@ -58,12 +63,8 @@ export default async function RealizaceDetailPage({
 
             <div className="lg:col-span-5">
               <div className="rounded-3xl border p-6" style={{ borderColor: "var(--line)", background: "var(--surface)" }}>
-                <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
-                  Realizace {id}
-                </h1>
-                <p className="mt-3 text-slate-600 leading-8">
-                  Krátký popis realizace. Materiály, rozsah práce, zajímavosti.
-                </p>
+                <h1 className="text-2xl font-semibold tracking-tight text-slate-900">{item.title}</h1>
+                <p className="mt-3 text-slate-600 leading-8">{item.description}</p>
 
                 <dl className="mt-6 grid gap-4 text-sm">
                   <div>
