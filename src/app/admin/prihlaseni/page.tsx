@@ -1,9 +1,21 @@
-export default function AdminLoginPage() {
+export default async function AdminLoginPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ err?: string }>;
+}) {
+  const sp = (await searchParams) || {};
+  const err = sp.err === "1";
+
   return (
     <div className="container py-12">
       <div className="max-w-sm rounded-2xl border p-6" style={{ borderColor: "var(--line)", background: "var(--surface)" }}>
         <h1 className="text-xl font-semibold text-slate-900">Přihlášení (admin)</h1>
         <p className="mt-2 text-sm text-slate-600">Zadej admin heslo.</p>
+        {err ? (
+          <div className="mt-4 rounded-xl border px-4 py-3 text-sm" style={{ borderColor: "rgba(239,68,68,.35)", background: "rgba(239,68,68,.08)", color: "#991b1b" }}>
+            Špatné heslo.
+          </div>
+        ) : null}
 
         <form className="mt-6 grid gap-3" action="/admin/api/login" method="post">
           <input
