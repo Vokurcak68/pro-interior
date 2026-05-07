@@ -23,7 +23,8 @@ function readAll(): RealizaceItem[] {
     return Array.isArray(data) ? data : [];
   } catch {
     // Fallback: použij bundlený JSON (spolehlivé na Vercelu)
-    const data = realizaceBundled as unknown as RealizaceItem[];
+    // Pozor: podle bundleru to může být buď přímo pole, nebo objekt { default: pole }.
+    const data = ((realizaceBundled as unknown as { default?: unknown })?.default ?? realizaceBundled) as unknown as RealizaceItem[];
     return Array.isArray(data) ? data : [];
   }
 }
