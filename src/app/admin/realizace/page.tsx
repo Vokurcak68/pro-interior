@@ -42,10 +42,16 @@ export default async function AdminRealizaceList() {
                   <div className="text-sm font-semibold text-slate-900 truncate">{it.title}</div>
                   <div className="mt-1 text-xs text-slate-600">{it.published ? "Publikováno" : "Neveřejné"}</div>
                 </div>
-                {it.imageUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={it.imageUrl} alt="" className="h-16 w-24 rounded-xl object-cover border" style={{ borderColor: "var(--line)" }} />
-                ) : null}
+                <div
+                  className="h-16 w-24 rounded-xl border bg-center bg-cover"
+                  style={{
+                    borderColor: "var(--line)",
+                    backgroundImage: it.imageUrl
+                      ? `url(${it.imageUrl})`
+                      : `url(/realizace/hero-1.jpg), linear-gradient(135deg, rgba(249,115,22,.10), rgba(245,158,11,.06))`,
+                  }}
+                  aria-label={it.title}
+                />
               </div>
               <div className="mt-3 text-sm text-slate-600 line-clamp-3">{it.description}</div>
               <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
