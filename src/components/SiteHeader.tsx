@@ -36,21 +36,30 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
       }
     >
       <div className="container">
-        <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+        <div className="flex h-16 items-center justify-between gap-3">
+          <Link href="/" className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
             <Image
               src="/logo.jpg"
               alt="Pro-Interior"
-              width={36}
-              height={36}
+              width={34}
+              height={34}
               className={isOverlay ? "rounded-lg" : "rounded-lg border"}
               style={isOverlay ? undefined : { borderColor: "var(--line)" }}
             />
-            <div className="leading-tight">
-              <div className={isOverlay ? "font-semibold tracking-tight text-white" : "font-semibold tracking-tight text-slate-900"}>
-                pro-interior
+            <div className="min-w-0 leading-tight">
+              <div
+                className={
+                  isOverlay
+                    ? "font-semibold tracking-tight text-white truncate text-sm sm:text-base"
+                    : "font-semibold tracking-tight text-slate-900 truncate text-sm sm:text-base"
+                }
+              >
+                Pro-Interior
               </div>
-              <div className={isOverlay ? "text-xs text-white/80" : "text-xs"} style={isOverlay ? undefined : { color: "var(--wood)" }}>
+              <div
+                className={isOverlay ? "hidden sm:block text-xs text-white/80" : "hidden sm:block text-xs"}
+                style={isOverlay ? undefined : { color: "var(--wood)" }}
+              >
                 truhlářství
               </div>
             </div>
@@ -65,26 +74,37 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            {/* Mobile menu button */}
+          <div className="flex shrink-0 items-center gap-2">
+            {/* Mobile hamburger */}
             <button
               type="button"
               className={
                 isOverlay
-                  ? "md:hidden rounded-full px-3 py-2 text-sm font-medium text-white/95 border border-white/25 bg-white/10"
-                  : "md:hidden rounded-full px-3 py-2 text-sm font-medium text-slate-900 border"
+                  ? "md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/10"
+                  : "md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border"
               }
-              style={isOverlay ? undefined : { borderColor: "var(--line)", background: "rgba(255,255,255,.9)" }}
-              aria-label="Menu"
+              style={isOverlay ? undefined : { borderColor: "var(--line)", background: "rgba(255,255,255,.92)" }}
+              aria-label={open ? "Zavřít menu" : "Otevřít menu"}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
             >
-              Menu
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path
+                  d="M4 7h16M4 12h16M4 17h16"
+                  stroke={isOverlay ? "white" : "currentColor"}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
             </button>
 
             <Link
               href="/kontakt"
-              className={isOverlay ? "rounded-full px-4 py-2 text-sm font-medium text-slate-900" : "rounded-full px-4 py-2 text-sm font-medium text-white"}
+              className={
+                isOverlay
+                  ? "hidden sm:inline-flex rounded-full px-4 py-2 text-sm font-medium text-slate-900 whitespace-nowrap"
+                  : "hidden sm:inline-flex rounded-full px-4 py-2 text-sm font-medium text-white whitespace-nowrap"
+              }
               style={
                 isOverlay
                   ? { background: "rgba(255,255,255,.92)", border: "1px solid rgba(255,255,255,.25)" }
@@ -99,22 +119,16 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
 
         {/* Mobile dropdown */}
         {open ? (
-          <div
-            className={
-              isOverlay
-                ? "md:hidden pb-4"
-                : "md:hidden pb-4"
-            }
-          >
+          <div className="md:hidden pb-4">
             <div
               className={
                 isOverlay
                   ? "rounded-2xl p-4 border border-white/20 bg-black/30 backdrop-blur"
                   : "rounded-2xl p-4 border"
               }
-              style={isOverlay ? undefined : { borderColor: "var(--line)", background: "rgba(255,255,255,.92)" }}
+              style={isOverlay ? undefined : { borderColor: "var(--line)", background: "rgba(255,255,255,.96)" }}
             >
-              <div className={`grid gap-2 text-sm ${navClass}`}>
+              <div className={`grid gap-1 text-sm ${navClass}`}>
                 {nav.map((i) => (
                   <Link
                     key={i.href}
@@ -125,6 +139,13 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
                     {i.label}
                   </Link>
                 ))}
+                <Link
+                  href="/kontakt"
+                  className={`${navHover} transition-colors py-2 sm:hidden`}
+                  onClick={() => setOpen(false)}
+                >
+                  Nezávazná poptávka
+                </Link>
               </div>
             </div>
           </div>
