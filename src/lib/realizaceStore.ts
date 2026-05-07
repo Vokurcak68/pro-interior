@@ -14,9 +14,19 @@ export const REALIZACE_JSON_PATH = "src/data/realizace.json";
 const DATA_PATH = path.resolve(process.cwd(), REALIZACE_JSON_PATH);
 
 function readAll(): RealizaceItem[] {
-  const raw = fs.readFileSync(DATA_PATH, "utf8");
-  const data = JSON.parse(raw) as RealizaceItem[];
-  return Array.isArray(data) ? data : [];
+  // Pozn.: Na Vercelu nemusí být k dispozici soubor `src/data/realizace.json` přes fs
+  // (záleží na bundlingu / runtime). Proto zkusíme fallback přes import.
+  try {
+    const raw = fs.readFileSync(DATA_PATH, "utf8");
+    const data = JSON.parse(raw) as RealizaceItem[];
+    return Array.isArray(data) ? data : [];
+  } catch {
+    // Fallback: načti JSON přes ESM import (funguje spolehlivě i po bundlingu)
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const mod = require("@/data/realizace.json");
+    const data = (mod?.default ?? mod) as RealizaceItem[];
+    return Array.isArray(data) ? data : [];
+  }
 }
 
 export function listRealizace({ includeUnpublished = false } = {}) {
