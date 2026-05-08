@@ -93,8 +93,8 @@ export default async function AdminRealizaceEditPage({
             <img
               src={item.imageUrl}
               alt=""
-              className="mt-2 h-40 w-full max-w-full rounded-2xl object-cover border"
-              style={{ borderColor: "var(--line)" }}
+              className="mt-2 h-64 sm:h-72 w-full max-w-full rounded-2xl object-contain border"
+              style={{ borderColor: "var(--line)", background: "rgba(255,255,255,.7)" }}
             />
           ) : null}
           <div className="text-xs text-slate-500">Když vybereš novou fotku, přepíše se.</div>
