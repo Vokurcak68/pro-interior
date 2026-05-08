@@ -102,5 +102,5 @@ export async function POST(req: Request) {
     // pokud GH zápis nevyjde, aspoň lokální zápis zůstane
   }
 
-  return NextResponse.redirect(new URL("/admin/realizace", req.url));
+  return NextResponse.redirect(new URL("/admin/realizace", req.url), 303);
 }
