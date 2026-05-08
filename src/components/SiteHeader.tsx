@@ -145,18 +145,17 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
           <div className="md:hidden pb-4">
             <div
               className={
-                isOverlay
-                  ? "rounded-2xl p-4 border border-white/20 bg-black/30 backdrop-blur"
-                  : "rounded-2xl p-4 border"
+                // Na homepage chceme dropdown světlý jako na ostatních stránkách.
+                "rounded-2xl p-4 border"
               }
-              style={isOverlay ? undefined : { borderColor: "var(--line)", background: "rgba(255,255,255,.96)" }}
+              style={{ borderColor: "var(--line)", background: "rgba(255,255,255,.96)" }}
             >
-              <div className={`grid gap-1 text-sm ${navClass}`}>
+              <div className="grid gap-1 text-sm text-slate-700">
                 {nav.map((i) => (
                   <Link
                     key={i.href}
                     href={i.href}
-                    className={`${navHover} transition-colors py-2`}
+                    className="hover:text-slate-950 transition-colors py-2"
                     onClick={() => setOpen(false)}
                   >
                     {i.label}
@@ -164,7 +163,7 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
                 ))}
                 <Link
                   href="/kontakt"
-                  className={`${navHover} transition-colors py-2 sm:hidden`}
+                  className="hover:text-slate-950 transition-colors py-2 sm:hidden"
                   onClick={() => setOpen(false)}
                 >
                   Nezávazná poptávka
