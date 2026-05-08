@@ -101,8 +101,26 @@ export default function KontaktPage() {
                   </div>
                 </div>
 
-                <div className="mt-6 aspect-[4/3] rounded-2xl border bg-slate-50 flex items-center justify-center text-slate-500 text-sm" style={{ borderColor: "var(--line)" }}>
-                  Mapa (volitelně)
+                <div className="mt-6 overflow-hidden rounded-2xl border" style={{ borderColor: "var(--line)" }}>
+                  <div className="aspect-[4/3]">
+                    <iframe
+                      title="Mapa – Lešany 40, 257 44"
+                      className="h-full w-full"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      src="https://www.google.com/maps?q=Le%C5%A1any%2040%2C%20257%2044&output=embed"
+                    />
+                  </div>
+                  <div className="border-t px-4 py-3 text-xs" style={{ borderColor: "var(--line)", background: "rgba(255,255,255,.6)" }}>
+                    <a
+                      className="font-medium text-slate-900 underline decoration-slate-300 hover:decoration-slate-500"
+                      href="https://www.google.com/maps/search/?api=1&query=Le%C5%A1any%2040%2C%20257%2044"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Otevřít v Google Maps
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
