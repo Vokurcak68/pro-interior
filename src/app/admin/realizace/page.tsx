@@ -3,13 +3,23 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { ADMIN_COOKIE_NAME, isAdminFromCookie } from "@/lib/adminAuth";
 import { listRealizace } from "@/lib/realizaceStore";
+import ConfirmDeleteRealizaceForm from "@/components/admin/ConfirmDeleteRealizaceForm";
 
-export default async function AdminRealizaceList() {
+export default async function AdminRealizaceList({
+  searchParams,
+}: {
+  searchParams?: Promise<{ err?: string; deleted?: string }>;
+}) { 
+
   const cookieStore = await cookies();
   const token = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
   if (!isAdminFromCookie(token)) redirect("/admin/prihlaseni");
 
   const items = listRealizace({ includeUnpublished: true });
+
+  const sp = (await searchParams) || {};
+  const err = sp.err || "";
+  const deleted = sp.deleted === "1";
 
   return (
     <div className="container max-w-3xl py-10">
@@ -28,6 +38,29 @@ export default async function AdminRealizaceList() {
           + Nová realizace
         </Link>
       </div>
+
+      {deleted ? (
+        <div
+          className="mt-6 rounded-xl border px-4 py-3 text-sm"
+          style={{ borderColor: "rgba(34,197,94,.35)", background: "rgba(34,197,94,.08)", color: "#166534" }}
+        >
+          Realizace smazána.
+        </div>
+      ) : err === "gh" ? (
+        <div
+          className="mt-6 rounded-xl border px-4 py-3 text-sm"
+          style={{ borderColor: "rgba(239,68,68,.35)", background: "rgba(239,68,68,.08)", color: "#991b1b" }}
+        >
+          Smazání selhalo (GitHub token/env). Změny se nepropsaly.
+        </div>
+      ) : err === "notfound" ? (
+        <div
+          className="mt-6 rounded-xl border px-4 py-3 text-sm"
+          style={{ borderColor: "rgba(239,68,68,.35)", background: "rgba(239,68,68,.08)", color: "#991b1b" }}
+        >
+          Realizace už neexistuje (nebo se mezitím změnil seznam).
+        </div>
+      ) : null}
 
       <div className="mt-6 grid gap-4">
         {items.length === 0 ? (
@@ -64,16 +97,7 @@ export default async function AdminRealizaceList() {
                   >
                     Upravit
                   </Link>
-                  <form action="/admin/api/realizace/delete" method="post">
-                    <input type="hidden" name="id" value={it.id} />
-                    <button
-                      type="submit"
-                      className="rounded-full px-4 py-2 text-xs font-semibold border"
-                      style={{ borderColor: "rgba(239,68,68,.35)", background: "rgba(239,68,68,.08)", color: "#991b1b" }}
-                    >
-                      Smazat
-                    </button>
-                  </form>
+                  <ConfirmDeleteRealizaceForm id={it.id} title={it.title} />
                 </div>
               </div>
             </div>
