@@ -30,7 +30,7 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
       ({
         borderColor: "rgba(255,255,255,.10)",
         // jen šedohnědý bar (bez obrázku), aby header nebyl "foto".
-        background: "linear-gradient(135deg, rgba(35,25,20,.92), rgba(20,16,14,.86))",
+        background: "linear-gradient(135deg, rgba(87, 60, 38, .92), rgba(60, 41, 26, .88))",
         backdropFilter: "blur(10px)",
       }) as const,
     [],
