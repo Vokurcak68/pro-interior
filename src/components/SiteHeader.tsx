@@ -57,7 +57,11 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
     <>
       <header
         className={"fixed inset-x-0 top-0 z-40"}
-        style={isOverlay ? overlayStyle : stickyStyle}
+        style={{
+          ...(isOverlay ? overlayStyle : stickyStyle),
+          // iOS Safari safe-area (notch) – ať header neskáče pod status bar.
+          paddingTop: "env(safe-area-inset-top)",
+        }}
       >
       <div className="container">
         <div className="flex h-16 items-center justify-between gap-3">
@@ -177,10 +181,7 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
       </header>
       {/* Spacer aby obsah nezačínal pod fixed headrem (na homepage hero to řeší paddingTop) */}
       {!isOverlay ? (
-        <div
-          className="h-24"
-          style={{ height: "calc(64px + env(safe-area-inset-top) + 24px)" }}
-        />
+        <div style={{ height: "calc(64px + env(safe-area-inset-top) + 24px)" }} />
       ) : null}
     </>
   );
