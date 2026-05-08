@@ -80,16 +80,24 @@ export default function KontaktPage() {
                 <div className="text-base font-semibold text-slate-900">Kontakt</div>
                 <div className="mt-4 grid gap-3 text-sm text-slate-700">
                   <div>
+                    <div className="text-slate-500">Firma</div>
+                    <div className="font-medium text-slate-900">Tomáš Prostecký – PRO-interior</div>
+                  </div>
+                  <div>
+                    <div className="text-slate-500">Adresa</div>
+                    <div className="font-medium text-slate-900">Lešany 40, 257 44</div>
+                  </div>
+                  <div>
                     <div className="text-slate-500">Telefon</div>
-                    <div className="font-medium text-slate-900">Doplníme</div>
+                    <a className="font-medium text-slate-900 underline decoration-slate-300 hover:decoration-slate-500" href="tel:+420724808157">
+                      +420 724 808 157
+                    </a>
                   </div>
                   <div>
                     <div className="text-slate-500">E-mail</div>
-                    <div className="font-medium text-slate-900">Doplníme</div>
-                  </div>
-                  <div>
-                    <div className="text-slate-500">Lokalita</div>
-                    <div className="font-medium text-slate-900">Praha a okolí</div>
+                    <a className="font-medium text-slate-900 underline decoration-slate-300 hover:decoration-slate-500" href="mailto:prointerior@gmail.com">
+                      prointerior@gmail.com
+                    </a>
                   </div>
                 </div>
 
