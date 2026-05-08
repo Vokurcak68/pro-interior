@@ -34,16 +34,16 @@
   {
     "id": "seed-hero-5",
     "createdAt": "2026-05-03T00:00:00.000Z",
-    "title": "Moderní kuchyně – jednobarevná dvířka",
-    "description": "Moderní kuchyně s hladkými jednobarevnými dvířky a dřevěným akcentem. Důraz na čistý detail, praktické rozvržení a pohodlné vaření.",
+    "title": "Rohová kuchyně v dřevodekoru",
+    "description": "Rohová kuchyně na míru v teplém dřevodekoru. Chytré rohové řešení, dostatek pracovní plochy a úložného prostoru, čisté napojení detailů a praktické rozvržení pro každodenní vaření.",
     "imageUrl": "/realizace/hero-5.jpg",
     "published": true
   },
   {
     "id": "seed-hero-6",
     "createdAt": "2026-05-02T00:00:00.000Z",
-    "title": "Vestavba do ložnice – šatní skříň",
-    "description": "Světlá vestavba do ložnice: šatní skříň a úložné řešení na míru. Vizuálně lehké provedení, jednoduché členění a maximum využitelného prostoru.",
+    "title": "Moderní kuchyně – jednobarevná dvířka",
+    "description": "Moderní kuchyně s hladkými jednobarevnými dvířky a dřevěným akcentem. Důraz na čistý detail, praktické rozvržení a pohodlné vaření.",
     "imageUrl": "/realizace/hero-6.jpg",
     "published": true
   }
