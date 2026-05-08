@@ -44,12 +44,14 @@ export async function POST(req: Request) {
   const publicImageUrl = `/uploads/realizace/${filename}`;
   item.imageUrl = publicImageUrl;
 
-  const uploadsDir = path.resolve(process.cwd(), "public/uploads/realizace");
-  fs.mkdirSync(uploadsDir, { recursive: true });
-  fs.writeFileSync(path.join(uploadsDir, filename), bytes);
+  // 3) LOCAL fallback (funguje lokálně; na Vercelu je filesystem read-only)
+  if (!process.env.VERCEL) {
+    const uploadsDir = path.resolve(process.cwd(), "public/uploads/realizace");
+    fs.mkdirSync(uploadsDir, { recursive: true });
+    fs.writeFileSync(path.join(uploadsDir, filename), bytes);
 
-  // 3) LOCAL fallback (funguje lokálně, na Vercelu nemusí být trvalé)
-  upsertRealizaceLocal(item);
+    upsertRealizaceLocal(item);
+  }
 
   // 4) PRODUKCE: commitni změny do GitHub repa (json + obrázek), aby byly trvalé
   try {

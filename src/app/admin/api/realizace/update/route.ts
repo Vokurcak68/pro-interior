@@ -61,10 +61,12 @@ export async function POST(req: Request) {
     const filename = `${id}.${ext}`;
     const publicImageUrl = `/uploads/realizace/${filename}`;
 
-    // local write
-    const uploadsDir = path.resolve(process.cwd(), "public/uploads/realizace");
-    fs.mkdirSync(uploadsDir, { recursive: true });
-    fs.writeFileSync(path.join(uploadsDir, filename), bytes);
+    // local write (jen lokálně; na Vercelu je filesystem read-only)
+    if (!process.env.VERCEL) {
+      const uploadsDir = path.resolve(process.cwd(), "public/uploads/realizace");
+      fs.mkdirSync(uploadsDir, { recursive: true });
+      fs.writeFileSync(path.join(uploadsDir, filename), bytes);
+    }
 
     // if old image was also an upload but with different ext/path, delete it in GH
     if (existing.imageUrl.startsWith("/uploads/realizace/") && existing.imageUrl !== publicImageUrl) {
@@ -76,8 +78,10 @@ export async function POST(req: Request) {
     newImageRepoPath = `public/uploads/realizace/${filename}`;
   }
 
-  // local upsert (dev)
-  upsertRealizaceLocal(next);
+  // local upsert (jen lokálně; na Vercelu je filesystem read-only)
+  if (!process.env.VERCEL) {
+    upsertRealizaceLocal(next);
+  }
 
   // prod upsert via GitHub
   try {
