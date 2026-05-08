@@ -21,7 +21,7 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
 
   return (
     <header
-      className={isOverlay ? "absolute inset-x-0 top-0 z-40" : "sticky top-0 z-40 border-b"}
+      className={isOverlay ? "fixed inset-x-0 top-0 z-40" : "sticky top-0 z-40 border-b"}
       style={
         isOverlay
           ? {
