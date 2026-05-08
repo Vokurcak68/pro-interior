@@ -54,10 +54,11 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
   const navHover = headerIsDark ? "hover:text-white" : "hover:text-slate-950";
 
   return (
-    <header
-      className={isOverlay ? "fixed inset-x-0 top-0 z-40" : "sticky top-0 z-40 border-b"}
-      style={isOverlay ? overlayStyle : stickyStyle}
-    >
+    <>
+      <header
+        className={"fixed inset-x-0 top-0 z-40"}
+        style={isOverlay ? overlayStyle : stickyStyle}
+      >
       <div className="container">
         <div className="flex h-16 items-center justify-between gap-3">
           <Link href="/" className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
@@ -173,6 +174,9 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
           </div>
         ) : null}
       </div>
-    </header>
+      </header>
+      {/* Spacer aby obsah nezačínal pod fixed headrem (na homepage hero to řeší paddingTop) */}
+      {!isOverlay ? <div className="h-16" /> : null}
+    </>
   );
 }
