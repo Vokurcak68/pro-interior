@@ -11,7 +11,7 @@ export async function POST(req: Request) {
   const cookieStore = await cookies();
   const token = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
   if (!isAdminFromCookie(token)) {
-    return NextResponse.redirect(new URL("/admin/prihlaseni", req.url));
+    return NextResponse.redirect(new URL("/admin/prihlaseni", req.url), 303);
   }
 
   const form = await req.formData();
