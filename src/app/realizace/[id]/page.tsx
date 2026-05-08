@@ -68,7 +68,7 @@ export default async function RealizaceDetailPage({
 
                 <div className="mt-8 flex gap-3">
                   <Link
-                    href="/kontakt"
+                    href="/poptavka"
                     className="inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-medium text-white"
                     style={{ background: "linear-gradient(135deg, var(--brand), var(--brand-2))" }}
                   >

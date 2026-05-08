@@ -122,7 +122,7 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
             </button>
 
             <Link
-              href="/kontakt"
+              href="/poptavka"
               className={
                 isOverlay
                   ? "hidden sm:inline-flex rounded-full px-4 py-2 text-sm font-medium text-slate-900 whitespace-nowrap"
@@ -162,7 +162,7 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
                   </Link>
                 ))}
                 <Link
-                  href="/kontakt"
+                  href="/poptavka"
                   className="hover:text-slate-950 transition-colors py-2 sm:hidden"
                   onClick={() => setOpen(false)}
                 >
