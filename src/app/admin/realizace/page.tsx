@@ -13,7 +13,7 @@ export default async function AdminRealizaceList() {
 
   return (
     <div className="container py-10">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex items-center justify-between">
         <div>
           <div className="text-xs font-semibold tracking-[0.22em] uppercase" style={{ color: "var(--brand)" }}>
             ADMIN / REALIZACE
@@ -22,7 +22,7 @@ export default async function AdminRealizaceList() {
         </div>
         <Link
           href="/admin/realizace/nova"
-          className="rounded-full px-4 py-3 text-sm font-medium text-white text-center w-full sm:w-auto"
+          className="rounded-full px-4 py-2 text-sm font-medium text-white"
           style={{ background: "linear-gradient(135deg, var(--brand), var(--brand-2))" }}
         >
           + Nová realizace
@@ -37,13 +37,13 @@ export default async function AdminRealizaceList() {
         ) : (
           items.map((it) => (
             <div key={it.id} className="rounded-2xl border p-5" style={{ borderColor: "var(--line)", background: "var(--surface)" }}>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+              <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <div className="text-sm font-semibold text-slate-900 truncate">{it.title}</div>
                   <div className="mt-1 text-xs text-slate-600">{it.published ? "Publikováno" : "Neveřejné"}</div>
                 </div>
                 <div
-                  className="h-16 w-full sm:w-24 rounded-xl border bg-center bg-cover"
+                  className="h-16 w-24 rounded-xl border bg-center bg-cover"
                   style={{
                     borderColor: "var(--line)",
                     backgroundImage: it.imageUrl
@@ -54,12 +54,12 @@ export default async function AdminRealizaceList() {
                 />
               </div>
               <div className="mt-3 text-sm text-slate-600 line-clamp-3">{it.description}</div>
-              <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
                 <div className="text-xs text-slate-500">ID: {it.id}</div>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                <div className="flex items-center gap-2">
                   <Link
                     href={`/admin/realizace/${it.id}`}
-                    className="rounded-full px-4 py-3 text-xs font-semibold border text-center w-full sm:w-auto"
+                    className="rounded-full px-4 py-2 text-xs font-semibold border"
                     style={{ borderColor: "var(--line)", background: "rgba(255,255,255,.6)" }}
                   >
                     Upravit
@@ -68,7 +68,7 @@ export default async function AdminRealizaceList() {
                     <input type="hidden" name="id" value={it.id} />
                     <button
                       type="submit"
-                      className="rounded-full px-4 py-3 text-xs font-semibold border text-center w-full sm:w-auto"
+                      className="rounded-full px-4 py-2 text-xs font-semibold border"
                       style={{ borderColor: "rgba(239,68,68,.35)", background: "rgba(239,68,68,.08)", color: "#991b1b" }}
                     >
                       Smazat
