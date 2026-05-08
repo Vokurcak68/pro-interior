@@ -11,14 +11,14 @@ export default async function AdminRealizaceEditPage({
 }: {
   params: Promise<{ id: string }>;
   searchParams?: Promise<{ err?: string }>;
-}) {
+}) { 
   const cookieStore = await cookies();
   const token = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
   if (!isAdminFromCookie(token)) redirect("/admin/prihlaseni");
 
   const { id } = await params;
   const sp = (await searchParams) || {};
-  const err = sp.err === "1";
+  const err = sp.err || "";
 
   const item = getRealizaceById(id);
   if (!item) redirect("/admin/realizace?err=notfound");
@@ -42,9 +42,13 @@ export default async function AdminRealizaceEditPage({
         </Link>
       </div>
 
-      {err ? (
+      {err === "toolarge" ? (
         <div className="mt-6 rounded-xl border px-4 py-3 text-sm" style={{ borderColor: "rgba(239,68,68,.35)", background: "rgba(239,68,68,.08)", color: "#991b1b" }}>
-          Vyplň prosím název a popis.
+          Fotka je moc velká (payload too large). Zkus ji prosím zmenšit / poslat v menší kvalitě (ideálně do ~4&nbsp;MB).
+        </div>
+      ) : err === "1" ? (
+        <div className="mt-6 rounded-xl border px-4 py-3 text-sm" style={{ borderColor: "rgba(239,68,68,.35)", background: "rgba(239,68,68,.08)", color: "#991b1b" }}>
+          Vyplň prosím všechna pole.
         </div>
       ) : null}
 

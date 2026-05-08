@@ -2,10 +2,17 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { ADMIN_COOKIE_NAME, isAdminFromCookie } from "@/lib/adminAuth";
 
-export default async function AdminNovaRealizace() {
+export default async function AdminNovaRealizace({
+  searchParams,
+}: {
+  searchParams?: Promise<{ err?: string }>;
+}) {
   const cookieStore = await cookies();
   const token = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
   if (!isAdminFromCookie(token)) redirect("/admin/prihlaseni");
+
+  const sp = (await searchParams) || {};
+  const err = sp.err || "";
 
   return (
     <div className="container py-10">
@@ -13,6 +20,22 @@ export default async function AdminNovaRealizace() {
         ADMIN / REALIZACE
       </div>
       <h1 className="mt-2 text-2xl font-semibold text-slate-900">Nová realizace</h1>
+
+      {err === "toolarge" ? (
+        <div
+          className="mt-6 rounded-xl border px-4 py-3 text-sm"
+          style={{ borderColor: "rgba(239,68,68,.35)", background: "rgba(239,68,68,.08)", color: "#991b1b" }}
+        >
+          Fotka je moc velká (payload too large). Zkus ji prosím zmenšit / poslat v menší kvalitě (ideálně do ~4&nbsp;MB).
+        </div>
+      ) : err === "1" ? (
+        <div
+          className="mt-6 rounded-xl border px-4 py-3 text-sm"
+          style={{ borderColor: "rgba(239,68,68,.35)", background: "rgba(239,68,68,.08)", color: "#991b1b" }}
+        >
+          Vyplň prosím všechna pole a vyber fotku.
+        </div>
+      ) : null}
 
       <form
         className="mt-6 grid gap-4 max-w-xl"

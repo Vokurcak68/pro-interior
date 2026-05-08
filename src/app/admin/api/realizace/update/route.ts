@@ -50,6 +50,11 @@ export async function POST(req: Request) {
   let oldImageRepoPathToDelete: string | null = null;
 
   if (file instanceof File && file.size > 0) {
+    const MAX_UPLOAD_BYTES = 4 * 1024 * 1024; // 4 MB
+    if (file.size > MAX_UPLOAD_BYTES) {
+      return NextResponse.redirect(new URL(`/admin/realizace/${encodeURIComponent(id)}?err=toolarge`, req.url), 303);
+    }
+
     const bytes = Buffer.from(await file.arrayBuffer());
     const ext = (() => {
       const t = file.type || "";

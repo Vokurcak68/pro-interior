@@ -25,7 +25,14 @@ export async function POST(req: Request) {
   const file = form.get("image");
 
   if (!title || !description || !category || !location || !Number.isFinite(year) || !(file instanceof File)) {
-    return NextResponse.redirect(new URL("/admin/realizace/nova?err=1", req.url));
+    return NextResponse.redirect(new URL("/admin/realizace/nova?err=1", req.url), 303);
+  }
+
+  // Vercel má limit na velikost request body (multipart upload). Držme se bezpečně pod limitem.
+  // (payload too large = typicky příliš velká fotka)
+  const MAX_UPLOAD_BYTES = 4 * 1024 * 1024; // 4 MB
+  if (file.size > MAX_UPLOAD_BYTES) {
+    return NextResponse.redirect(new URL("/admin/realizace/nova?err=toolarge", req.url), 303);
   }
 
   const bytes = Buffer.from(await file.arrayBuffer());
