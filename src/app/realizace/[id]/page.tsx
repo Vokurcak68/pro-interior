@@ -43,22 +43,7 @@ export default async function RealizaceDetailPage({
                 />
               </div>
 
-              {/* Zatím máme jen 1 fotku na realizaci (seed). Až přidáš víc fotek, přidáme sem galerii. */}
-              <div className="mt-4 grid grid-cols-4 gap-3">
-                {Array.from({ length: 4 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="aspect-square rounded-2xl border overflow-hidden"
-                    style={{ borderColor: "var(--line)", background: "var(--surface)" }}
-                  >
-                    <div
-                      className="h-full w-full bg-center bg-cover"
-                      style={{ backgroundImage: mainBg }}
-                      aria-label={item.title}
-                    />
-                  </div>
-                ))}
-              </div>
+              {/* Zatím máme jen 1 fotku na realizaci. Jakmile bude galerie, přidáme sem další fotky. */}
             </div>
 
             <div className="lg:col-span-5">
