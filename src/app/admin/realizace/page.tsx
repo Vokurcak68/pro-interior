@@ -36,14 +36,14 @@ export default async function AdminRealizaceList() {
           </div>
         ) : (
           items.map((it) => (
-            <div key={it.id} className="rounded-2xl border p-5" style={{ borderColor: "var(--line)", background: "var(--surface)" }}>
-              <div className="flex items-start justify-between gap-4">
-                <div className="min-w-0">
-                  <div className="text-sm font-semibold text-slate-900 truncate">{it.title}</div>
+            <div key={it.id} className="rounded-2xl border p-5 overflow-x-hidden" style={{ borderColor: "var(--line)", background: "var(--surface)" }}>
+              <div className="flex items-start justify-between gap-4 min-w-0">
+                <div className="min-w-0 flex-1">
+                  <div className="text-sm font-semibold text-slate-900 break-words">{it.title}</div>
                   <div className="mt-1 text-xs text-slate-600">{it.published ? "Publikováno" : "Neveřejné"}</div>
                 </div>
                 <div
-                  className="h-16 w-24 rounded-xl border bg-center bg-cover"
+                  className="h-16 w-24 shrink-0 rounded-xl border bg-center bg-cover"
                   style={{
                     borderColor: "var(--line)",
                     backgroundImage: it.imageUrl
