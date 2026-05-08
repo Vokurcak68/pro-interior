@@ -5,7 +5,10 @@
     "title": "Kuchyně na míru – světlý dub",
     "description": "Světlá kuchyně na míru s dřevodekorem a čistou pracovní plochou. Minimalistické linie, hodně úložného prostoru a teplý „domácí“ výraz.",
     "imageUrl": "/realizace/hero-1.jpg",
-    "published": true
+    "published": true,
+    "category": "Kuchyně",
+    "location": "Praha a okolí",
+    "year": 2026
   },
   {
     "id": "seed-hero-2",
@@ -13,7 +16,10 @@
     "title": "Nábytek z masivu",
     "description": "Nábytek z masivu na míru s důrazem na detail a poctivé zpracování. Precizní napojení, čisté hrany a kvalitní povrchová úprava, aby výsledný kus dlouho vydržel a dobře sloužil.",
     "imageUrl": "/realizace/hero-2.jpg",
-    "published": true
+    "published": true,
+    "category": "Nábytek",
+    "location": "Praha a okolí",
+    "year": 2026
   },
   {
     "id": "seed-hero-3",
@@ -21,7 +27,10 @@
     "title": "Vestavěná skříň na míru",
     "description": "Vestavěná skříň na míru s čistými bílými plochami a dřevěným dekorem. Praktické členění pro uložení oblečení a věcí, bez zbytečných detailů – moderní, nadčasové řešení.",
     "imageUrl": "/realizace/hero-3.jpg",
-    "published": true
+    "published": true,
+    "category": "Vestavby",
+    "location": "Praha a okolí",
+    "year": 2026
   },
   {
     "id": "seed-hero-4",
@@ -29,7 +38,10 @@
     "title": "Koupelna – skříňka pod umyvadlo",
     "description": "Koupelnový nábytek na míru s deskou pod umyvadlo a úložnými zásuvkami. Minimalistické provedení, odolné materiály a snadná údržba.",
     "imageUrl": "/realizace/hero-4.jpg",
-    "published": true
+    "published": true,
+    "category": "Koupelna",
+    "location": "Praha a okolí",
+    "year": 2026
   },
   {
     "id": "seed-hero-5",
@@ -37,7 +49,10 @@
     "title": "Rohová kuchyně v dřevodekoru",
     "description": "Rohová kuchyně na míru v teplém dřevodekoru. Chytré rohové řešení, dostatek pracovní plochy a úložného prostoru, čisté napojení detailů a praktické rozvržení pro každodenní vaření.",
     "imageUrl": "/realizace/hero-5.jpg",
-    "published": true
+    "published": true,
+    "category": "Kuchyně",
+    "location": "Praha a okolí",
+    "year": 2026
   },
   {
     "id": "seed-hero-6",
@@ -45,6 +60,9 @@
     "title": "Moderní kuchyně – jednobarevná dvířka",
     "description": "Moderní kuchyně s hladkými jednobarevnými dvířky a dřevěným akcentem. Důraz na čistý detail, praktické rozvržení a pohodlné vaření.",
     "imageUrl": "/realizace/hero-6.jpg",
-    "published": true
+    "published": true,
+    "category": "Kuchyně",
+    "location": "Praha a okolí",
+    "year": 2026
   }
 ]

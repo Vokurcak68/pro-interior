@@ -9,10 +9,22 @@ export type RealizaceItem = {
   description: string;
   imageUrl: string; // e.g. /uploads/realizace/<id>.jpg
   published: boolean;
+  category?: string;
+  location?: string;
+  year?: number;
 };
 
 export const REALIZACE_JSON_PATH = "src/data/realizace.json";
 const DATA_PATH = path.resolve(process.cwd(), REALIZACE_JSON_PATH);
+
+function normalizeItem(x: RealizaceItem): RealizaceItem {
+  return {
+    ...x,
+    category: x.category || "",
+    location: x.location || "",
+    year: typeof x.year === "number" ? x.year : new Date(x.createdAt || Date.now()).getFullYear(),
+  };
+}
 
 function readAll(): RealizaceItem[] {
   // Pozn.: Na Vercelu nemusí být k dispozici soubor `src/data/realizace.json` přes fs
@@ -20,12 +32,12 @@ function readAll(): RealizaceItem[] {
   try {
     const raw = fs.readFileSync(DATA_PATH, "utf8");
     const data = JSON.parse(raw) as RealizaceItem[];
-    return Array.isArray(data) ? data : [];
+    return Array.isArray(data) ? data.map(normalizeItem) : [];
   } catch {
     // Fallback: použij bundlený JSON (spolehlivé na Vercelu)
     // Pozor: podle bundleru to může být buď přímo pole, nebo objekt { default: pole }.
     const data = ((realizaceBundled as unknown as { default?: unknown })?.default ?? realizaceBundled) as unknown as RealizaceItem[];
-    return Array.isArray(data) ? data : [];
+    return Array.isArray(data) ? data.map(normalizeItem) : [];
   }
 }
 
@@ -39,6 +51,9 @@ export function createRealizaceDraft(input: {
   description: string;
   imageUrl: string;
   published: boolean;
+  category: string;
+  location: string;
+  year: number;
 }) {
   const id = `r_${Math.random().toString(16).slice(2)}${Date.now().toString(16)}`;
   const item: RealizaceItem = {
@@ -48,6 +63,9 @@ export function createRealizaceDraft(input: {
     description: input.description,
     imageUrl: input.imageUrl,
     published: input.published,
+    category: input.category,
+    location: input.location,
+    year: input.year,
   };
   return item;
 }

@@ -19,10 +19,14 @@ export async function POST(req: Request) {
   const id = String(form.get("id") || "").trim();
   const title = String(form.get("title") || "").trim();
   const description = String(form.get("description") || "").trim();
+  const category = String(form.get("category") || "").trim();
+  const location = String(form.get("location") || "").trim();
+  const yearRaw = String(form.get("year") || "").trim();
+  const year = Number.parseInt(yearRaw, 10);
   const published = String(form.get("published") || "") === "1";
   const file = form.get("image");
 
-  if (!id || !title || !description) {
+  if (!id || !title || !description || !category || !location || !Number.isFinite(year)) {
     return NextResponse.redirect(new URL(`/admin/realizace/${encodeURIComponent(id || "")}?err=1`, req.url), 303);
   }
 
@@ -35,6 +39,9 @@ export async function POST(req: Request) {
     ...existing,
     title,
     description,
+    category,
+    location,
+    year,
     published,
   };
 

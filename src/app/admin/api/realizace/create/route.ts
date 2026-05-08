@@ -17,10 +17,14 @@ export async function POST(req: Request) {
   const form = await req.formData();
   const title = String(form.get("title") || "").trim();
   const description = String(form.get("description") || "").trim();
+  const category = String(form.get("category") || "").trim();
+  const location = String(form.get("location") || "").trim();
+  const yearRaw = String(form.get("year") || "").trim();
+  const year = Number.parseInt(yearRaw, 10);
   const published = String(form.get("published") || "") === "1";
   const file = form.get("image");
 
-  if (!title || !description || !(file instanceof File)) {
+  if (!title || !description || !category || !location || !Number.isFinite(year) || !(file instanceof File)) {
     return NextResponse.redirect(new URL("/admin/realizace/nova?err=1", req.url));
   }
 
@@ -33,7 +37,7 @@ export async function POST(req: Request) {
   })();
 
   // 1) vytvoř "draft" záznam s id
-  const item = createRealizaceDraft({ title, description, imageUrl: "", published });
+  const item = createRealizaceDraft({ title, description, category, location, year, imageUrl: "", published });
 
   // 2) ulož obrázek lokálně (dev) + připrav base64 pro GitHub (prod)
   const filename = `${item.id}.${ext}`;

@@ -80,6 +80,45 @@ export default async function AdminRealizaceEditPage({
           />
         </label>
 
+        <div className="grid gap-4 sm:grid-cols-3">
+          <label className="grid gap-2 sm:col-span-3">
+            <div className="text-sm font-medium text-slate-900">Kategorie</div>
+            <input
+              name="category"
+              defaultValue={item.category || ""}
+              className="w-full min-w-0 rounded-xl border px-4 py-3 text-sm"
+              style={{ borderColor: "var(--line)", background: "white" }}
+              required
+            />
+          </label>
+
+          <label className="grid gap-2 sm:col-span-2">
+            <div className="text-sm font-medium text-slate-900">Lokalita</div>
+            <input
+              name="location"
+              defaultValue={item.location || ""}
+              className="w-full min-w-0 rounded-xl border px-4 py-3 text-sm"
+              style={{ borderColor: "var(--line)", background: "white" }}
+              required
+            />
+          </label>
+
+          <label className="grid gap-2 sm:col-span-1">
+            <div className="text-sm font-medium text-slate-900">Rok</div>
+            <input
+              name="year"
+              type="number"
+              inputMode="numeric"
+              min={2000}
+              max={2100}
+              defaultValue={item.year || new Date(item.createdAt).getFullYear()}
+              className="w-full min-w-0 rounded-xl border px-4 py-3 text-sm"
+              style={{ borderColor: "var(--line)", background: "white" }}
+              required
+            />
+          </label>
+        </div>
+
         <label className="flex items-center gap-3">
           <input type="checkbox" name="published" value="1" defaultChecked={item.published} />
           <span className="text-sm text-slate-700">Publikovat</span>

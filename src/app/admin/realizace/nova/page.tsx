@@ -37,10 +37,49 @@ export default async function AdminNovaRealizace() {
           required
         />
 
-        <div className="rounded-xl border p-4" style={{ borderColor: "var(--line)", background: "var(--surface)" }}>
-          <div className="text-sm font-medium text-slate-900">Fotka</div>
-          <input name="image" type="file" accept="image/*" className="mt-2 block w-full text-sm" required />
-          <div className="mt-2 text-xs text-slate-600">Zatím 1 fotka na realizaci.</div>
+        <div className="grid gap-4 rounded-xl border p-4" style={{ borderColor: "var(--line)", background: "var(--surface)" }}>
+          <div className="grid gap-2">
+            <div className="text-sm font-medium text-slate-900">Kategorie</div>
+            <input
+              name="category"
+              placeholder="Např. Kuchyně / Vestavby / Nábytek"
+              className="w-full rounded-xl border px-4 py-3 text-sm"
+              style={{ borderColor: "var(--line)", background: "white" }}
+              required
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <div className="text-sm font-medium text-slate-900">Lokalita</div>
+            <input
+              name="location"
+              placeholder="Např. Praha a okolí"
+              className="w-full rounded-xl border px-4 py-3 text-sm"
+              style={{ borderColor: "var(--line)", background: "white" }}
+              required
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <div className="text-sm font-medium text-slate-900">Rok</div>
+            <input
+              name="year"
+              type="number"
+              inputMode="numeric"
+              min={2000}
+              max={2100}
+              placeholder="2026"
+              className="w-full rounded-xl border px-4 py-3 text-sm"
+              style={{ borderColor: "var(--line)", background: "white" }}
+              required
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <div className="text-sm font-medium text-slate-900">Fotka</div>
+            <input name="image" type="file" accept="image/*" className="block w-full text-sm" required />
+            <div className="text-xs text-slate-600">Zatím 1 fotka na realizaci.</div>
+          </div>
         </div>
 
         <label className="inline-flex items-center gap-2 text-sm text-slate-700">

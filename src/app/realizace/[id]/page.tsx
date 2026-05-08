@@ -54,15 +54,15 @@ export default async function RealizaceDetailPage({
                 <dl className="mt-6 grid gap-4 text-sm">
                   <div>
                     <dt className="text-slate-500">Kategorie</dt>
-                    <dd className="font-medium text-slate-900">Kuchyně / Vestavby / Nábytek</dd>
+                    <dd className="font-medium text-slate-900">{item.category || ""}</dd>
                   </div>
                   <div>
                     <dt className="text-slate-500">Lokalita</dt>
-                    <dd className="font-medium text-slate-900">Praha a okolí</dd>
+                    <dd className="font-medium text-slate-900">{item.location || ""}</dd>
                   </div>
                   <div>
                     <dt className="text-slate-500">Rok</dt>
-                    <dd className="font-medium text-slate-900">2026</dd>
+                    <dd className="font-medium text-slate-900">{item.year || ""}</dd>
                   </div>
                 </dl>
 
