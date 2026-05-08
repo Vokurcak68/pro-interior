@@ -24,6 +24,7 @@ export default function Home() {
 
   return (
     <div className="min-h-full flex flex-col">
+      <SiteHeader />
       <main className="flex-1">
         {/* HERO (cover jako Tříska) */}
         <section className="relative">
@@ -36,8 +37,6 @@ export default function Home() {
               backgroundPosition: "center",
             }}
           >
-            <SiteHeader variant="overlay" />
-
             <div className="container h-full">
               <div className="pt-28 sm:pt-32">
                 <div className="max-w-2xl">
