@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { ADMIN_COOKIE_NAME, isAdminFromCookie } from "@/lib/adminAuth";
 import { listRealizace } from "@/lib/realizaceStore";
 import ConfirmDeleteRealizaceForm from "@/components/admin/ConfirmDeleteRealizaceForm";
+import AdminRealizaceFlash from "@/components/admin/AdminRealizaceFlash";
 
 export default async function AdminRealizaceList({
   searchParams,
@@ -20,6 +21,7 @@ export default async function AdminRealizaceList({
   const sp = (await searchParams) || {};
   const err = sp.err || "";
   const deleted = sp.deleted === "1";
+  const hasFlash = deleted || !!err;
 
   return (
     <div className="container max-w-3xl py-10">
@@ -38,6 +40,8 @@ export default async function AdminRealizaceList({
           + Nová realizace
         </Link>
       </div>
+
+      <AdminRealizaceFlash hasFlash={hasFlash} />
 
       {deleted ? (
         <div
