@@ -87,10 +87,15 @@ export default async function AdminRealizaceEditPage({
 
         <div className="grid gap-2">
           <div className="text-sm font-medium text-slate-900">Fotka (volitelné)</div>
-          <input type="file" name="image" accept="image/*" />
+          <input type="file" name="image" accept="image/*" className="block w-full max-w-full" />
           {item.imageUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={item.imageUrl} alt="" className="mt-2 h-40 w-full max-w-md rounded-2xl object-cover border" style={{ borderColor: "var(--line)" }} />
+            <img
+              src={item.imageUrl}
+              alt=""
+              className="mt-2 h-40 w-full max-w-full rounded-2xl object-cover border"
+              style={{ borderColor: "var(--line)" }}
+            />
           ) : null}
           <div className="text-xs text-slate-500">Když vybereš novou fotku, přepíše se.</div>
         </div>
