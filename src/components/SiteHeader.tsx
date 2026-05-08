@@ -25,34 +25,38 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
     return () => window.removeEventListener("scroll", onScroll);
   }, [isOverlay]);
 
+  const darkBarStyle = useMemo(
+    () =>
+      ({
+        borderColor: "rgba(255,255,255,.10)",
+        background:
+          "linear-gradient(90deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.32) 55%, rgba(0,0,0,.18) 100%), url(/realizace/hero-1.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backdropFilter: "blur(10px)",
+      }) as const,
+    [],
+  );
+
   const overlayStyle = useMemo(() => {
-    // tmavší "šedohnědý" bar jako podklad pro čitelnost na světlých sekcích
+    // overlay: nahoře průhledné přes hero, po scrollu / otevření menu přejde na tmavý bar
     if (!isOverlay) return undefined;
     if (!scrolled && !open) {
       return { borderColor: "transparent", background: "transparent" } as const;
     }
-    return {
-      borderColor: "rgba(255,255,255,.10)",
-      background: "linear-gradient(135deg, rgba(35,25,20,.88), rgba(20,16,14,.80))",
-      backdropFilter: "blur(10px)",
-    } as const;
-  }, [isOverlay, scrolled, open]);
+    return darkBarStyle;
+  }, [isOverlay, scrolled, open, darkBarStyle]);
 
-  const navClass = isOverlay ? "text-white/90" : "text-slate-700";
-  const navHover = isOverlay ? "hover:text-white" : "hover:text-slate-950";
+  // Sticky varianta na ostatních stránkách: vždy tmavý bar + stejné pozadí jako homepage
+  const stickyStyle = darkBarStyle;
+
+  const navClass = "text-white/90";
+  const navHover = "hover:text-white";
 
   return (
     <header
       className={isOverlay ? "fixed inset-x-0 top-0 z-40" : "sticky top-0 z-40 border-b"}
-      style={
-        isOverlay
-          ? overlayStyle
-          : {
-              borderColor: "var(--line)",
-              background: "rgba(255, 247, 237, .85)",
-              backdropFilter: "blur(10px)",
-            }
-      }
+      style={isOverlay ? overlayStyle : stickyStyle}
     >
       <div className="container">
         <div className="flex h-16 items-center justify-between gap-3">
