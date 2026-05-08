@@ -25,7 +25,7 @@ export default async function AdminRealizaceEditPage({
 
   return (
     <div className="container py-10">
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <div>
           <div className="text-xs font-semibold tracking-[0.22em] uppercase" style={{ color: "var(--brand)" }}>
             ADMIN / REALIZACE
@@ -33,7 +33,11 @@ export default async function AdminRealizaceEditPage({
           <h1 className="mt-2 text-2xl font-semibold text-slate-900">Upravit realizaci</h1>
           <div className="mt-2 text-xs text-slate-500">ID: {item.id}</div>
         </div>
-        <Link href="/admin/realizace" className="text-sm hover:underline" style={{ color: "var(--wood)" }}>
+        <Link
+          href="/admin/realizace"
+          className="text-sm hover:underline self-start sm:self-auto"
+          style={{ color: "var(--wood)" }}
+        >
           ← Zpět
         </Link>
       </div>
@@ -45,7 +49,7 @@ export default async function AdminRealizaceEditPage({
       ) : null}
 
       <form
-        className="mt-6 grid gap-4 rounded-2xl border p-6"
+        className="mt-6 grid gap-4 rounded-2xl border p-4 sm:p-6"
         style={{ borderColor: "var(--line)", background: "var(--surface)" }}
         action="/admin/api/realizace/update"
         method="post"
@@ -58,7 +62,7 @@ export default async function AdminRealizaceEditPage({
           <input
             name="title"
             defaultValue={item.title}
-            className="w-full rounded-xl border px-4 py-3 text-sm"
+            className="w-full min-w-0 rounded-xl border px-4 py-3 text-sm"
             style={{ borderColor: "var(--line)", background: "white" }}
             required
           />
@@ -70,7 +74,7 @@ export default async function AdminRealizaceEditPage({
             name="description"
             defaultValue={item.description}
             rows={6}
-            className="w-full rounded-xl border px-4 py-3 text-sm"
+            className="w-full min-w-0 rounded-xl border px-4 py-3 text-sm"
             style={{ borderColor: "var(--line)", background: "white" }}
             required
           />
@@ -91,17 +95,17 @@ export default async function AdminRealizaceEditPage({
           <div className="text-xs text-slate-500">Když vybereš novou fotku, přepíše se.</div>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           <button
             type="submit"
-            className="rounded-full px-5 py-3 text-sm font-medium text-white"
+            className="rounded-full px-5 py-3 text-sm font-medium text-white w-full sm:w-auto"
             style={{ background: "linear-gradient(135deg, var(--brand), var(--brand-2))" }}
           >
             Uložit změny
           </button>
           <Link
             href="/admin/realizace"
-            className="rounded-full px-5 py-3 text-sm font-medium border"
+            className="rounded-full px-5 py-3 text-sm font-medium border text-center w-full sm:w-auto"
             style={{ borderColor: "var(--line)", background: "rgba(255,255,255,.7)" }}
           >
             Zrušit
