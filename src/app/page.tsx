@@ -35,6 +35,9 @@ export default function Home() {
                 "linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.28) 55%, rgba(0,0,0,.10) 100%), url(/realizace/hero-1.jpg)",
               backgroundSize: "cover",
               backgroundPosition: "center",
+              // oříznutí horní části (pod header barem)
+              paddingTop: "64px",
+              boxSizing: "border-box",
             }}
           >
             <div className="container h-full">

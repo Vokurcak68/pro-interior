@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const nav = [
   { href: "/", label: "Domů" },
@@ -15,6 +15,28 @@ const nav = [
 export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overlay" }) {
   const isOverlay = variant === "overlay";
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (!isOverlay) return;
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isOverlay]);
+
+  const overlayStyle = useMemo(() => {
+    // tmavší "šedohnědý" bar jako podklad pro čitelnost na světlých sekcích
+    if (!isOverlay) return undefined;
+    if (!scrolled && !open) {
+      return { borderColor: "transparent", background: "transparent" } as const;
+    }
+    return {
+      borderColor: "rgba(255,255,255,.10)",
+      background: "linear-gradient(135deg, rgba(35,25,20,.88), rgba(20,16,14,.80))",
+      backdropFilter: "blur(10px)",
+    } as const;
+  }, [isOverlay, scrolled, open]);
 
   const navClass = isOverlay ? "text-white/90" : "text-slate-700";
   const navHover = isOverlay ? "hover:text-white" : "hover:text-slate-950";
@@ -24,10 +46,7 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
       className={isOverlay ? "fixed inset-x-0 top-0 z-40" : "sticky top-0 z-40 border-b"}
       style={
         isOverlay
-          ? {
-              borderColor: "transparent",
-              background: "transparent",
-            }
+          ? overlayStyle
           : {
               borderColor: "var(--line)",
               background: "rgba(255, 247, 237, .85)",
