@@ -1,16 +1,5 @@
 [
   {
-    "id": "r_1ddcfa11ed786819e08d6b67a",
-    "createdAt": "2026-05-08T18:25:49.690Z",
-    "title": "Test 2",
-    "description": "Test 2",
-    "imageUrl": "/uploads/realizace/r_1ddcfa11ed786819e08d6b67a.png",
-    "published": true,
-    "category": "Aa",
-    "location": "Bb",
-    "year": 2025
-  },
-  {
     "id": "r_2ac823b8011d819e0885f02c",
     "createdAt": "2026-05-08T16:57:36.044Z",
     "title": "Test",
