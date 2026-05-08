@@ -176,7 +176,7 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
       </div>
       </header>
       {/* Spacer aby obsah nezačínal pod fixed headrem (na homepage hero to řeší paddingTop) */}
-      {!isOverlay ? <div className="h-16 md:h-20" /> : null}
+      {!isOverlay ? <div className="h-20" /> : null}
     </>
   );
 }
