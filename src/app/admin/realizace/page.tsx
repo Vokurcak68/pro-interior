@@ -12,7 +12,7 @@ export default async function AdminRealizaceList() {
   const items = listRealizace({ includeUnpublished: true });
 
   return (
-    <div className="container py-10">
+    <div className="container max-w-4xl py-10">
       <div className="flex items-center justify-between">
         <div>
           <div className="text-xs font-semibold tracking-[0.22em] uppercase" style={{ color: "var(--brand)" }}>
