@@ -18,51 +18,60 @@ export async function POST(req: Request) {
     return NextResponse.redirect(new URL("/admin/realizace?err=1", req.url), 303);
   }
 
-  // local delete (dev)
-  const { deleted } = deleteRealizaceLocal(id);
+  const existing = listRealizace({ includeUnpublished: true });
+  const toDelete = existing.find((x) => x.id === id) || null;
+  if (!toDelete) {
+    return NextResponse.redirect(new URL("/admin/realizace?err=notfound", req.url), 303);
+  }
+
+  // local delete (dev) — na Vercelu je filesystem read-only
+  if (!process.env.VERCEL) {
+    deleteRealizaceLocal(id);
+  }
 
   // prod delete via GitHub (json + image)
-  try {
-    const ghToken = getRequiredEnv("PI_GITHUB_TOKEN");
-    const owner = getRequiredEnv("PI_GITHUB_OWNER");
-    const repo = getRequiredEnv("PI_GITHUB_REPO");
-    const branch = getRequiredEnv("PI_GITHUB_BRANCH");
+  if (process.env.VERCEL) {
+    try {
+      const ghToken = getRequiredEnv("PI_GITHUB_TOKEN");
+      const owner = getRequiredEnv("PI_GITHUB_OWNER");
+      const repo = getRequiredEnv("PI_GITHUB_REPO");
+      const branch = getRequiredEnv("PI_GITHUB_BRANCH");
 
-    // update JSON
-    const existing = listRealizace({ includeUnpublished: true });
-    const next = existing.filter((x) => x.id !== id);
-    const json = JSON.stringify(next, null, 2) + "\n";
+      // update JSON
+      const next = existing.filter((x) => x.id !== id);
+      const json = JSON.stringify(next, null, 2) + "\n";
 
-    const sha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: REALIZACE_JSON_PATH });
-    await githubWriteFile({
-      token: ghToken,
-      owner,
-      repo,
-      branch,
-      path: REALIZACE_JSON_PATH,
-      sha,
-      contentBase64: Buffer.from(json, "utf8").toString("base64"),
-      message: `Delete realizace: ${id}`,
-    });
-
-    // delete image if it's in uploads and we know its path
-    const imageUrl = deleted?.imageUrl || "";
-    if (imageUrl.startsWith("/uploads/realizace/")) {
-      const imageRepoPath = `public${imageUrl}`;
-      const imageSha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: imageRepoPath });
-      await githubDeleteFile({
+      const sha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: REALIZACE_JSON_PATH });
+      await githubWriteFile({
         token: ghToken,
         owner,
         repo,
         branch,
-        path: imageRepoPath,
-        sha: imageSha,
-        message: `Delete realizace image: ${id}`,
+        path: REALIZACE_JSON_PATH,
+        sha,
+        contentBase64: Buffer.from(json, "utf8").toString("base64"),
+        message: `Delete realizace: ${id}`,
       });
+
+      // delete image if it's in uploads
+      const imageUrl = toDelete.imageUrl || "";
+      if (imageUrl.startsWith("/uploads/realizace/")) {
+        const imageRepoPath = `public${imageUrl}`;
+        const imageSha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: imageRepoPath });
+        await githubDeleteFile({
+          token: ghToken,
+          owner,
+          repo,
+          branch,
+          path: imageRepoPath,
+          sha: imageSha,
+          message: `Delete realizace image: ${id}`,
+        });
+      }
+    } catch {
+      return NextResponse.redirect(new URL("/admin/realizace?err=gh", req.url), 303);
     }
-  } catch {
-    // ignore
   }
 
-  return NextResponse.redirect(new URL("/admin/realizace", req.url), 303);
+  return NextResponse.redirect(new URL("/admin/realizace?deleted=1", req.url), 303);
 }
