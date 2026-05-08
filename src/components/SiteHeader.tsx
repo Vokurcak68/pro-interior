@@ -48,8 +48,10 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
   // Sticky varianta na ostatních stránkách: vždy tmavý bar + stejné pozadí jako homepage
   const stickyStyle = darkBarStyle;
 
-  const navClass = "text-white/90";
-  const navHover = "hover:text-white";
+  const headerIsDark = isOverlay || variant === "sticky";
+
+  const navClass = headerIsDark ? "text-white/90" : "text-slate-700";
+  const navHover = headerIsDark ? "hover:text-white" : "hover:text-slate-950";
 
   return (
     <header
@@ -70,7 +72,7 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
             <div className="min-w-0 leading-tight">
               <div
                 className={
-                  isOverlay
+                  headerIsDark
                     ? "font-semibold tracking-tight text-white truncate text-sm sm:text-base"
                     : "font-semibold tracking-tight text-slate-900 truncate text-sm sm:text-base"
                 }
@@ -78,8 +80,8 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
                 PRO-interior
               </div>
               <div
-                className={isOverlay ? "hidden sm:block text-xs text-white/80" : "hidden sm:block text-xs"}
-                style={isOverlay ? undefined : { color: "var(--wood)" }}
+                className={headerIsDark ? "hidden sm:block text-xs text-white/80" : "hidden sm:block text-xs"}
+                style={headerIsDark ? undefined : { color: "var(--wood)" }}
               >
                 truhlářství
               </div>
