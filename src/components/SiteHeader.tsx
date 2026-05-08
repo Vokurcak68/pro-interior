@@ -29,10 +29,8 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
     () =>
       ({
         borderColor: "rgba(255,255,255,.10)",
-        background:
-          "linear-gradient(90deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.32) 55%, rgba(0,0,0,.18) 100%), url(/realizace/hero-1.jpg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        // jen šedohnědý bar (bez obrázku), aby header nebyl "foto".
+        background: "linear-gradient(135deg, rgba(35,25,20,.92), rgba(20,16,14,.86))",
         backdropFilter: "blur(10px)",
       }) as const,
     [],
