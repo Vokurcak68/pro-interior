@@ -28,6 +28,13 @@ export default async function AdminNovaRealizace({
         >
           Fotka je moc velká (payload too large). Zkus ji prosím zmenšit / poslat v menší kvalitě (ideálně do ~4&nbsp;MB).
         </div>
+      ) : err === "gh" ? (
+        <div
+          className="mt-6 rounded-xl border px-4 py-3 text-sm"
+          style={{ borderColor: "rgba(239,68,68,.35)", background: "rgba(239,68,68,.08)", color: "#991b1b" }}
+        >
+          Uložení do GitHubu selhalo (token/env). Realizace se proto nepropsala na web.
+        </div>
       ) : err === "1" ? (
         <div
           className="mt-6 rounded-xl border px-4 py-3 text-sm"

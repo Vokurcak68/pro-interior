@@ -61,53 +61,53 @@ export async function POST(req: Request) {
   }
 
   // 4) PRODUKCE: commitni změny do GitHub repa (json + obrázek), aby byly trvalé
-  try {
-    const ghToken = getRequiredEnv("PI_GITHUB_TOKEN");
-    const owner = getRequiredEnv("PI_GITHUB_OWNER");
-    const repo = getRequiredEnv("PI_GITHUB_REPO");
-    const branch = getRequiredEnv("PI_GITHUB_BRANCH");
-
-    // a) JSON: vezmi aktuální publikované položky + přidej novou (bez čtení z disku je to tricky)
-    //    Nejjednodušší: vygeneruj nový JSON z listRealizace(includeUnpublished=true) + item
-    const existing = listRealizace({ includeUnpublished: true });
-    const merged = [item, ...existing.filter((x) => x.id !== item.id)];
-    const json = JSON.stringify(merged, null, 2) + "\n";
-
-    const sha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: REALIZACE_JSON_PATH });
-    await githubWriteFile({
-      token: ghToken,
-      owner,
-      repo,
-      branch,
-      path: REALIZACE_JSON_PATH,
-      sha,
-      contentBase64: Buffer.from(json, "utf8").toString("base64"),
-      message: `Add realizace: ${title}`,
-    });
-
-    // b) image
-    const imageRepoPath = `public/uploads/realizace/${filename}`;
-    // image might not exist yet in repo
-    let imageSha: string | undefined = undefined;
+  if (process.env.VERCEL) {
     try {
-      imageSha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: imageRepoPath });
-    } catch {
-      // ignore (new file)
-    }
+      const ghToken = getRequiredEnv("PI_GITHUB_TOKEN");
+      const owner = getRequiredEnv("PI_GITHUB_OWNER");
+      const repo = getRequiredEnv("PI_GITHUB_REPO");
+      const branch = getRequiredEnv("PI_GITHUB_BRANCH");
 
-    await githubWriteFile({
-      token: ghToken,
-      owner,
-      repo,
-      branch,
-      path: imageRepoPath,
-      sha: imageSha,
-      contentBase64: bytes.toString("base64"),
-      message: `Add realizace image: ${title}`,
-    });
-  } catch {
-    // pokud GH zápis nevyjde, aspoň lokální zápis zůstane
+      // a) JSON
+      const existing = listRealizace({ includeUnpublished: true });
+      const merged = [item, ...existing.filter((x) => x.id !== item.id)];
+      const json = JSON.stringify(merged, null, 2) + "\n";
+
+      const sha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: REALIZACE_JSON_PATH });
+      await githubWriteFile({
+        token: ghToken,
+        owner,
+        repo,
+        branch,
+        path: REALIZACE_JSON_PATH,
+        sha,
+        contentBase64: Buffer.from(json, "utf8").toString("base64"),
+        message: `Add realizace: ${title}`,
+      });
+
+      // b) image
+      const imageRepoPath = `public/uploads/realizace/${filename}`;
+      let imageSha: string | undefined = undefined;
+      try {
+        imageSha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: imageRepoPath });
+      } catch {
+        // new file
+      }
+
+      await githubWriteFile({
+        token: ghToken,
+        owner,
+        repo,
+        branch,
+        path: imageRepoPath,
+        sha: imageSha,
+        contentBase64: bytes.toString("base64"),
+        message: `Add realizace image: ${title}`,
+      });
+    } catch {
+      return NextResponse.redirect(new URL("/admin/realizace/nova?err=gh", req.url), 303);
+    }
   }
 
-  return NextResponse.redirect(new URL("/admin/realizace", req.url), 303);
+  return NextResponse.redirect(new URL("/admin/realizace?created=1", req.url), 303);
 }

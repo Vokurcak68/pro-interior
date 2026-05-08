@@ -88,67 +88,69 @@ export async function POST(req: Request) {
     upsertRealizaceLocal(next);
   }
 
-  // prod upsert via GitHub
-  try {
-    const ghToken = getRequiredEnv("PI_GITHUB_TOKEN");
-    const owner = getRequiredEnv("PI_GITHUB_OWNER");
-    const repo = getRequiredEnv("PI_GITHUB_REPO");
-    const branch = getRequiredEnv("PI_GITHUB_BRANCH");
+  // prod upsert via GitHub (na Vercelu je to jediná trvalá cesta)
+  if (process.env.VERCEL) {
+    try {
+      const ghToken = getRequiredEnv("PI_GITHUB_TOKEN");
+      const owner = getRequiredEnv("PI_GITHUB_OWNER");
+      const repo = getRequiredEnv("PI_GITHUB_REPO");
+      const branch = getRequiredEnv("PI_GITHUB_BRANCH");
 
-    // update JSON
-    const all = listRealizace({ includeUnpublished: true });
-    const merged = [next, ...all.filter((x) => x.id !== id)];
-    const json = JSON.stringify(merged, null, 2) + "\n";
+      // update JSON
+      const all = listRealizace({ includeUnpublished: true });
+      const merged = [next, ...all.filter((x) => x.id !== id)];
+      const json = JSON.stringify(merged, null, 2) + "\n";
 
-    const sha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: REALIZACE_JSON_PATH });
-    await githubWriteFile({
-      token: ghToken,
-      owner,
-      repo,
-      branch,
-      path: REALIZACE_JSON_PATH,
-      sha,
-      contentBase64: Buffer.from(json, "utf8").toString("base64"),
-      message: `Update realizace: ${id}`,
-    });
-
-    // delete old image if needed
-    if (oldImageRepoPathToDelete) {
-      const oldSha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: oldImageRepoPathToDelete });
-      await githubDeleteFile({
-        token: ghToken,
-        owner,
-        repo,
-        branch,
-        path: oldImageRepoPathToDelete,
-        sha: oldSha,
-        message: `Delete old realizace image: ${id}`,
-      });
-    }
-
-    // write new image if provided
-    if (newImageBytes && newImageRepoPath) {
-      let imageSha: string | undefined = undefined;
-      try {
-        imageSha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: newImageRepoPath });
-      } catch {
-        // new file
-      }
-
+      const sha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: REALIZACE_JSON_PATH });
       await githubWriteFile({
         token: ghToken,
         owner,
         repo,
         branch,
-        path: newImageRepoPath,
-        sha: imageSha,
-        contentBase64: newImageBytes.toString("base64"),
-        message: `Update realizace image: ${id}`,
+        path: REALIZACE_JSON_PATH,
+        sha,
+        contentBase64: Buffer.from(json, "utf8").toString("base64"),
+        message: `Update realizace: ${id}`,
       });
+
+      // delete old image if needed
+      if (oldImageRepoPathToDelete) {
+        const oldSha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: oldImageRepoPathToDelete });
+        await githubDeleteFile({
+          token: ghToken,
+          owner,
+          repo,
+          branch,
+          path: oldImageRepoPathToDelete,
+          sha: oldSha,
+          message: `Delete old realizace image: ${id}`,
+        });
+      }
+
+      // write new image if provided
+      if (newImageBytes && newImageRepoPath) {
+        let imageSha: string | undefined = undefined;
+        try {
+          imageSha = await githubGetFileSha({ token: ghToken, owner, repo, branch, path: newImageRepoPath });
+        } catch {
+          // new file
+        }
+
+        await githubWriteFile({
+          token: ghToken,
+          owner,
+          repo,
+          branch,
+          path: newImageRepoPath,
+          sha: imageSha,
+          contentBase64: newImageBytes.toString("base64"),
+          message: `Update realizace image: ${id}`,
+        });
+      }
+    } catch {
+      return NextResponse.redirect(new URL(`/admin/realizace/${encodeURIComponent(id)}?err=gh`, req.url), 303);
     }
-  } catch {
-    // ignore
   }
 
-  return NextResponse.redirect(new URL("/admin/realizace", req.url), 303);
+  return NextResponse.redirect(new URL("/admin/realizace?updated=1", req.url), 303);
 }
