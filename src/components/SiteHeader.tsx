@@ -25,16 +25,19 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
     return () => window.removeEventListener("scroll", onScroll);
   }, [isOverlay]);
 
-  // Na vnitřních stránkách používáme fixed header – nastavíme globální offset,
-  // aby se obsah nikdy neschoval pod záhlaví (řeší i případy, kdy spacer/div selže kvůli CSS).
+  // Fix pro mobil: pevná hlavička + globální offset pro <main>, aby se obsah nikdy neschoval.
+  // Důležité: při přechodu na homepage (overlay) offset vždy nulujeme, jinak může zůstat viset po navigaci.
   useEffect(() => {
-    if (isOverlay) return;
     const root = document.documentElement;
-    const prev = root.style.getPropertyValue("--header-offset");
+
+    if (isOverlay) {
+      root.style.setProperty("--header-offset", "0px");
+      return;
+    }
+
     root.style.setProperty("--header-offset", "calc(96px + env(safe-area-inset-top))");
     return () => {
-      if (prev) root.style.setProperty("--header-offset", prev);
-      else root.style.removeProperty("--header-offset");
+      root.style.setProperty("--header-offset", "0px");
     };
   }, [isOverlay]);
 
