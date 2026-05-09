@@ -22,7 +22,7 @@ export default async function RealizaceDetailPage({
   return (
     <div className="min-h-full flex flex-col">
       <SiteHeader />
-      <main className="flex-1 py-12">
+      <main className="flex-1 py-12" style={{ paddingTop: "calc(var(--header-offset) + 48px)" }}>
         <div className="container">
           <div className="text-sm text-slate-600">
             <Link href="/realizace" className="hover:underline">

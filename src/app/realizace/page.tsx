@@ -18,7 +18,7 @@ export default function RealizacePage() {
   return (
     <div className="min-h-full flex flex-col">
       <SiteHeader />
-      <main className="flex-1 py-12">
+      <main className="flex-1 py-12" style={{ paddingTop: "calc(var(--header-offset) + 48px)" }}>
         <div className="container">
           <div className="max-w-2xl">
             <div className="text-xs font-semibold tracking-[0.22em] uppercase" style={{ color: "var(--brand)" }}>
