@@ -6,7 +6,7 @@ export default function SluzbyPage() {
     <div className="min-h-full flex flex-col">
       <SiteHeader />
       <main className="flex-1 py-12">
-        <div className="container">
+        <div className="container pt-6 sm:pt-8">
           <div className="max-w-2xl">
             <div className="text-xs font-semibold tracking-[0.22em] uppercase" style={{ color: "var(--brand)" }}>
               SLUŽBY
