@@ -99,7 +99,7 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
                     : "font-semibold tracking-tight text-slate-900 truncate text-sm sm:text-base"
                 }
               >
-                PRO-interior
+Interiéry navržené PRO vás
               </div>
               <div
                 className={headerIsDark ? "hidden sm:block text-xs text-white/80" : "hidden sm:block text-xs"}
