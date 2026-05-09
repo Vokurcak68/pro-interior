@@ -43,7 +43,10 @@ export default function Home() {
             <div className="container h-full">
               <div className="pt-16 sm:pt-20">
                 <div className="max-w-2xl">
-                  <h1 className="text-white text-4xl sm:text-6xl font-semibold tracking-tight">
+                  <div className="text-white/90 text-xs sm:text-sm font-semibold tracking-[0.22em] uppercase">
+                    Truhlářství
+                  </div>
+                  <h1 className="mt-2 text-white text-4xl sm:text-6xl font-semibold tracking-tight">
                     PRO-interior
                   </h1>
                   <p className="mt-5 text-white/90 text-lg leading-8">
