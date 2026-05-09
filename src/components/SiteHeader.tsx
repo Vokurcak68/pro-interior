@@ -85,9 +85,10 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
             <Image
               src="/logo.jpg"
               alt="PRO-interior"
-              width={44}
-              height={44}
-              className={(isOverlay ? "rounded-lg" : "rounded-lg border") + " h-11 w-11 shrink-0"}
+              // zachovat poměr (soubor je cca 800×302)
+              width={160}
+              height={60}
+              className={(isOverlay ? "rounded-lg" : "rounded-lg border") + " h-11 w-auto shrink-0 object-contain"}
               style={isOverlay ? undefined : { borderColor: "var(--line)" }}
             />
             <div className="min-w-0 leading-tight">
