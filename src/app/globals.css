@@ -15,6 +15,9 @@
 
   /* „wood“ akcent (jen jemně) */
   --wood: #92400e;          /* amber-800 */
+
+  /* offset pod fixed headrem (vnitřní stránky) */
+  --header-offset: 0px;
 }
 
 @theme inline {
@@ -29,6 +32,14 @@ html, body {
 body {
   background: var(--bg);
   color: var(--text);
+}
+
+/*
+  Bezpečný top padding pro stránky s fixed headrem.
+  SiteHeader (na vnitřních stránkách) nastaví --header-offset dynamicky.
+*/
+main {
+  padding-top: var(--header-offset);
 }
 
 ::selection {
