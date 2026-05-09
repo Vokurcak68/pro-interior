@@ -35,13 +35,13 @@ export default function Home() {
                 "linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.28) 55%, rgba(0,0,0,.10) 100%), url(/realizace/hero-1.jpg)",
               backgroundSize: "cover",
               backgroundPosition: "center",
-              // oříznutí horní části (pod header barem)
-              paddingTop: "64px",
+              // prostor pod overlay headrem (ať text nezačíná moc nízko)
+              paddingTop: "48px",
               boxSizing: "border-box",
             }}
           >
             <div className="container h-full">
-              <div className="pt-28 sm:pt-32">
+              <div className="pt-16 sm:pt-20">
                 <div className="max-w-2xl">
                   <h1 className="text-white text-4xl sm:text-6xl font-semibold tracking-tight">
                     PRO-interior
