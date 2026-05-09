@@ -181,7 +181,7 @@ export function SiteHeader({ variant = "sticky" }: { variant?: "sticky" | "overl
       </header>
       {/* Spacer aby obsah nezačínal pod fixed headrem (na homepage hero to řeší paddingTop) */}
       {!isOverlay ? (
-        <div style={{ height: "calc(64px + env(safe-area-inset-top) + 24px)" }} />
+        <div style={{ height: "calc(96px + env(safe-area-inset-top))" }} />
       ) : null}
     </>
   );
