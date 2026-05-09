@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export function SiteFooter() {
@@ -6,7 +7,15 @@ export function SiteFooter() {
       <div className="container">
         <div className="py-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <div className="text-sm text-slate-600">
-            <div className="font-semibold text-slate-900">Interiéry navržené PRO vás</div>
+            <div className="flex items-center gap-3">
+              <Image
+                src="/logo.jpg"
+                alt="PRO-interior"
+                width={160}
+                height={60}
+                className="h-11 w-auto object-contain"
+              />
+            </div>
             <div className="mt-2 text-slate-600">truhlářství na míru</div>
           </div>
 
